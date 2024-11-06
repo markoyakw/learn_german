@@ -1,0 +1,15 @@
+.input {
+    --input-color: lightgray;
+}
+
+.input {
+    border: 2px solid var(--input-color);
+    border-radius: 15px;
+    height: 50px;
+    font-size: var(--font-size-m);
+    padding: 0px var(--spacing-xs);
+}
+
+.input:focus {
+    background-color: rgba(var(--input-color), 0.5);
+}

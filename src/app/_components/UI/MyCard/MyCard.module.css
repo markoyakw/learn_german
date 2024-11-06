@@ -1,0 +1,8 @@
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card * {
+    margin: var(--spacing-xs) 0px
+}

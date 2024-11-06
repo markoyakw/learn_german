@@ -1,0 +1,18 @@
+html {
+    --spacing-m: 20px;
+    --spacing-s: 16px;
+    --spacing-xs: 12px;
+    --font-size-m: 20px;
+    --font-size-l: 28px;
+    --font-size-xl: 36px;
+}
+
+h1 {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+}
+
+h2 {
+    font-size: var(--font-size-l);
+    font-weight: bold;
+}

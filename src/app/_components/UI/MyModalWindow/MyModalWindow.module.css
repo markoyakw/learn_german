@@ -1,0 +1,34 @@
+.modal__area-around {
+    cursor: pointer;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__window {
+    cursor: default;
+    background-color: white;
+    padding: var(--spacing-m);
+    border-radius: 20px;
+}
+
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+    margin-bottom: var(--spacing-xs);
+}
+
+.modal__body{
+
+}
+
+.modal__area-around--visible {
+    display: flex;
+}

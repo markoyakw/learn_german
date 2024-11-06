@@ -1,0 +1,42 @@
+.slider-container {
+    position: relative;
+    width: 300px; /* Adjust slider width as needed */
+    height: 60px; /* Enough height to show the tooltip */
+    margin: 20px auto;
+  }
+  
+  .slider {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    appearance: none;
+    height: 5px;
+    background: #ddd;
+    outline: none;
+    border-radius: 5px;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3498db;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .slider-value {
+    position: absolute;
+    top: -30px; /* Position it above the thumb */
+    background-color: #3498db;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap; /* Prevent breaking */
+    z-index: 10;
+    pointer-events: none;
+    transform: translateX(0); /* Remove translateX as we're now dynamically calculating the offset */
+  }
