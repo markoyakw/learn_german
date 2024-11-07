@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactNode, useEffect } from 'react'
+import { ReactNode } from 'react'
 import classes from "./header.module.css"
 import { AppLanguageProvider } from '@/app/_hooks/useAppLanguageContext'
 import { TAppLanguage } from '@/app/_types/types'

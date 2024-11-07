@@ -2,7 +2,11 @@ import bcrypt from 'bcryptjs';
 import { NextResponse } from 'next/server';
 import User from '@/app/api/_models/User';
 import connectDB from '@/app/api/_utils/connectDB';
-import JWT from "jsonwebtoken"
+import JWT, { JwtPayload } from "jsonwebtoken"
+
+export type TJWTPayload = {
+    id: string
+}
 
 export type TLoginReqData = {
     login: string,
@@ -29,7 +33,8 @@ export async function POST(req: Request): Promise<NextResponse<TLoginResData>> {
         }
 
         const JWTSecret = process.env.JWT_SECRET as string
-        const token = JWT.sign({ id: user._id }, JWTSecret, { expiresIn: '1h' })
+        const JWTPayload: JwtPayload = { id: user._id }
+        const token = JWT.sign(JWTPayload, JWTSecret, { expiresIn: '1h' })
 
         const response = NextResponse.json({ message: "User logged in successfully" })
         response.cookies.set("Authorization", `Bearer ${token}`, {

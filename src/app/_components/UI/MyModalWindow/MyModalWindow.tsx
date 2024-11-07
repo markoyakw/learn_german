@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useRef } from 'react'
+import React, { MouseEvent, ReactNode, useEffect, useRef } from 'react'
 import classes from "./MyModalWindow.module.css"
 import MyIconButton from '../MyIconButton'
 
@@ -6,10 +6,10 @@ interface IMyModalWindowProps {
     isOpen: boolean,
     children: React.ReactNode,
     toggleWindow: () => void,
-    title?: string
+    header?: ReactNode
 }
 
-const MyModalWindow: React.FC<IMyModalWindowProps> = ({ isOpen, children, toggleWindow, title }) => {
+const MyModalWindow: React.FC<IMyModalWindowProps> = ({ isOpen, children, toggleWindow, header }) => {
 
     const areaAroundModalRef = useRef<HTMLDivElement | null>(null)
     const handleEscKeyDown = (e: KeyboardEvent) => {
@@ -37,7 +37,7 @@ const MyModalWindow: React.FC<IMyModalWindowProps> = ({ isOpen, children, toggle
         <div className={modalAreaAround} onClick={handleClickOutsideOfModalWindow} ref={areaAroundModalRef}>
             <div className={classes["modal__window"]}>
                 <div className={classes["modal__header"]}>
-                    <h2>{title}</h2>
+                    <h3>{header}</h3>
                     <MyIconButton iconType='cross' onClick={toggleWindow} />
                 </div>
                 <div className={classes["modal__body"]}>

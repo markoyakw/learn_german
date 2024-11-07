@@ -1,19 +1,30 @@
-import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/app/api/_utils/connectDB';
 import Word, { TWord } from '@/app/api/_models/Word';
 import User from '@/app/api/_models/User';
 
-type TAddWordReqData = TWord
-type TAddWordResData = { message: string, newWord?: TWord }
+export type TAddWordReqData = {
+    newWord: TWord,
+    collectionName: string
+}
+export type TAddWordResData = { message: string, newWord?: TWord }
 
 export async function POST(req: Request): Promise<NextResponse<TAddWordResData>> {
     try {
         connectDB()
-        const data: TAddWordReqData = await req.json()
-        const word = await new Word(data)
-        await word.save()
-        return NextResponse.json({ message: "New word has been added successfully", newWord: word })
+        const { newWord, collectionName }: TAddWordReqData = await req.json()
+        if (!collectionName) {
+            return NextResponse.json({ message: "No word collection name was provided" }, { status: 400 })
+        }
+        if (!newWord) {
+            return NextResponse.json({ message: "New word was not provided" }, { status: 400 })
+        }
+        const newWordMongooseObj = await new Word(newWord)
+        await newWordMongooseObj.save()
+        const newWordUser = await User.findById(req.userId)
+        await newWordUser.myVocabularyCollections.set(collectionName, newWordMongooseObj)
+        await newWordMongooseObj.save()
+        return NextResponse.json({ message: "New word has been added successfully", newWord: newWordMongooseObj })
     } catch (e) {
         console.log(e);
         if (e instanceof Error && e.name === "ValidationError") {

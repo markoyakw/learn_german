@@ -8,23 +8,9 @@ type TTranslationInputLabelProps = {
 }
 
 const TranslationInputLabel: FC<TTranslationInputLabelProps> = ({ translationLanguage, handleTranslationLanguageChange }) => {
-
-  const getLabelString = () => {
-    const normalizedTranslationLanguage = translationLanguage.toLowerCase()
-    switch (normalizedTranslationLanguage) {
-      case "ru": {
-        return "Перевод на "
-      }
-      case "en": {
-        return "Translation to"
-      }
-      default: throw new Error(`${translationLanguage} language is not supported.`)
-    }
-  }
-
   return (
     <>
-      {getLabelString()}
+      Translation to
       <MyLanguageSelector language={translationLanguage} handleLanguageChange={handleTranslationLanguageChange} />
     </>
   )

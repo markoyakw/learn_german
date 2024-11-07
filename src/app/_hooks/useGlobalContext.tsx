@@ -10,7 +10,7 @@ export interface IGlobalContext {
 
 const GlobalContext = createContext<IGlobalContext | undefined>(undefined)
 
-export const GlobalContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const UserContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [appLanguage, setAppLanguage] = useState<TAppLanguage>("en")
     const changeAppLanguage = (newLanguage: TAppLanguage) => {
         setAppLanguage(newLanguage)

@@ -9,6 +9,7 @@ import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 import TranslationInputLabel from './TranslationInputLabel'
 import getNotSupportedLanguageError from '@/app/_utils/getError/getNotSupportedLanguageError'
 import { fetchAddWord } from '@/app/_utils/apiCalls/myVocabulary/fetchAddWord'
+import { TAddWordReqData } from '@/app/api/(routes)/my-vocabulary/word/route'
 
 const AddWordForm = () => {
 
@@ -28,39 +29,6 @@ const AddWordForm = () => {
     addExampleOfUse({ text: "", language: translationLanguage })
   }
 
-  const getUseExampleLabel = (translationLanguage: TAppLanguage, id: number) => {
-    const getLabelWithoutId = () => {
-      const normalizedTranslationLanguage = translationLanguage.toLowerCase()
-      switch (normalizedTranslationLanguage) {
-        case "en": {
-          return "Use example"
-        }
-        case "ru": {
-          return "Пример использования"
-        }
-        default: {
-          throw new Error(getNotSupportedLanguageError(translationLanguage))
-        }
-      }
-    }
-    return `${getLabelWithoutId()} ${id + 1}`
-  }
-
-  const getIPAInputLabel = (translationLanguage: TAppLanguage) => {
-    const normalizedTranslationLanguage = translationLanguage.toLowerCase()
-    switch (normalizedTranslationLanguage) {
-      case "en": {
-        return "IPA pronunciation:"
-      }
-      case "ru": {
-        return "Транскрипция IPA:"
-      }
-      default: {
-        throw new Error(getNotSupportedLanguageError(translationLanguage))
-      }
-    }
-  }
-
   const onSubmit: SubmitHandler<TWord> = async (newWord) => {
     const addLanguageToEntryToLanguageArray = (array: TTextEntryToLanguage[]) => {
       return array.map(item => {
@@ -69,8 +37,10 @@ const AddWordForm = () => {
     }
     const translationToLanguageArr = addLanguageToEntryToLanguageArray(newWord.translationToLanguageArr)
     const examplesOfUse = addLanguageToEntryToLanguageArray(newWord.examplesOfUse)
-    const newWordWithLanguageData: TWord = { ...newWord, translationToLanguageArr, examplesOfUse, generatedWithAI: false }
-    fetchAddWord(newWordWithLanguageData)
+    const populatedNewWord = { ...newWord, translationToLanguageArr, examplesOfUse, generatedWithAI: false }
+    // const newWordWithLanguageData: TAddWordReqData = {newWord: populatedNewWord, collectionName:}
+    const res = await fetchAddWord(populatedNewWord)
+    // console.log(res)
   }
 
   return (
@@ -89,14 +59,14 @@ const AddWordForm = () => {
         <MyInput
           {...register("IPAPronunciation")}
           id="IPA-pronunciation"
-          label={getIPAInputLabel(translationLanguage)}
+          label="IPA pronunciation:"
         />
         {examplesOfUse.map((_, useExampleId) =>
           <MyInput
             key={examplesOfUse.length}
             {...register(`examplesOfUse.${useExampleId}.text`)}
             id={`example-of-use-${useExampleId}-${translationLanguage}-language`}
-            label={getUseExampleLabel(translationLanguage, useExampleId)}
+            label={`Use example ${useExampleId + 1}`}
           />)}
         <MyButton type='button' onClick={handleAddExampleOfUse}>
           Add use example

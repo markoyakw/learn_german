@@ -14,6 +14,9 @@ type TMyVocabularyProps = {
 
 const MyVocabulary: NextPage<TMyVocabularyProps> = (props) => {
 
+    const AddWordFormHeader = () => {
+        return <>Add new word to </>
+    }
     const [isAddWordWindowOpen, setIsAddWordWindowOpen] = useState(false)
 
     const handleAddWordWindowToggle = () => {
@@ -24,7 +27,7 @@ const MyVocabulary: NextPage<TMyVocabularyProps> = (props) => {
         <AppLanguageProvider initialValue={props.params.language}>
             <div>
                 <MyButton onClick={handleAddWordWindowToggle}>Add word</MyButton>
-                <MyModalWindow isOpen={isAddWordWindowOpen} toggleWindow={handleAddWordWindowToggle} title={"Add new word"}>
+                <MyModalWindow isOpen={isAddWordWindowOpen} toggleWindow={handleAddWordWindowToggle} header={"Add new word"}>
                     <AddWordForm />
                 </MyModalWindow>
                 {/* <MyVocabularyCollection /> */}
