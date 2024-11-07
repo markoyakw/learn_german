@@ -6,6 +6,7 @@ import Header from "./_components/Header/Header";
 import LanguageSelector from "./_components/Header/LanguageSelector/LanguageSelector";
 import { cookies } from "next/headers";
 import { TAppLanguage } from "./_types/types";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,8 +28,9 @@ export default async function RootLayout({
     <html lang={appLanguage}>
       <body className={inter.className}>
         <Header appLanguageCookie={appLanguage}>
-          Header
-          <LanguageSelector appLanguageCookie={appLanguage} />
+          <Link href={`/${appLanguage}/my-vocabulary`}>my vocabulary</Link>
+          <Link href={`/${appLanguage}/auth/login`}>login</Link>
+          <LanguageSelector />
         </Header>
         {children}
       </body>

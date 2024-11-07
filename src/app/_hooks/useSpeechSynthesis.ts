@@ -9,9 +9,8 @@ const useSpeechSynthesis = () => {
             setVoices(speechSynthesis.getVoices());
         };
 
-        // Load voices initially and when voices are changed
         speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged);
-        handleVoicesChanged(); // Call it once in case voices are already loaded
+        handleVoicesChanged();
 
         return () => {
             speechSynthesis.removeEventListener('voiceschanged', handleVoicesChanged);
@@ -35,7 +34,7 @@ const useSpeechSynthesis = () => {
             utterance.rate = speed;
 
             if (voices.length > 0) {
-                utterance.voice = voices.find((voice) => voice.lang === 'de-DE') || voices[0]; // Find the German voice or fallback
+                utterance.voice = voices.find((voice) => voice.lang === 'de-DE') || voices[0];
             }
 
             utterance.text = textToSay;

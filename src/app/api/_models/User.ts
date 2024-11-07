@@ -1,4 +1,4 @@
-import mongoose, { model, models, Schema } from "mongoose";
+import mongoose, { model, models, Mongoose, Schema } from "mongoose";
 import { supportedLanguagesEnum } from "./common";
 import Word, { TWord } from "./Word";
 import { TAppLanguage } from "@/app/_types/types";
@@ -9,10 +9,11 @@ export type TUser = {
     login: string,
     password: string,
     language: TAppLanguage,
-    myVocabularyCollections: TMyVocabularyCollections
+    myVocabularyCollections: TMyVocabularyCollections,
+    _id?: number
 }
 
-const User: Schema<TUser> = new Schema({
+const User: Schema = new Schema({
     login: {
         type: String,
         required: true,
@@ -30,8 +31,9 @@ const User: Schema<TUser> = new Schema({
     },
     language: {
         type: String,
-        enum: supportedLanguagesEnum
-    }
+        enum: supportedLanguagesEnum,
+        required: true
+    },
 })
 
 export default models.User || model("User", User)

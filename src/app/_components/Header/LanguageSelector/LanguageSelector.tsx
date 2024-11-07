@@ -7,12 +7,7 @@ import { useRouter } from 'next/navigation'
 import { ChangeEvent } from 'react'
 import MyLanguageSelector from '../../UI/MyLanguageSelector/MyLanguageSelector'
 
-interface ILanguageSelectorProps {
-    appLanguageCookie: TAppLanguage
-}
-
-const LanguageSelector: React.FC<ILanguageSelectorProps> = ({ appLanguageCookie }) => {
-
+const LanguageSelector: React.FC = () => {
     const { appLanguage, setAppLanguage } = useAppLanguageContext()
     const router = useRouter()
 

@@ -1,10 +1,10 @@
-import { TSetLanguageRes } from "@/app/api/(routes)/cookies/setLanguageCookie/route"
+import { TSetLanguageRes } from "@/app/api/(routes)/cookies/languageCookie/route"
 import { TAppLanguage } from "../../_types/types"
 import getBasicUrl from "../url/getBasicUrl"
 
 const fetchSetLanguageCookie = async (newLanguage: TAppLanguage): Promise<TSetLanguageRes> => {
     const basicUrl = getBasicUrl()
-    const url = `${basicUrl}/api/cookies/setLanguageCookie`
+    const url = `${basicUrl}/api/cookies/languageCookie`
     const body = JSON.stringify({
         newLanguage
     })

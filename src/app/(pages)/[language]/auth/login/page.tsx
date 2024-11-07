@@ -11,7 +11,6 @@ const Login = () => {
     const { register, handleSubmit, watch, control, formState } = useForm<TLoginReqData>()
     const onSubmit = async (loginData: TLoginReqData) => {
         const res = await fetchLogin(loginData)
-        console.log(res)
     }
 
     return (

@@ -7,9 +7,9 @@ type TMyVocabularyProps = {
 }
 
 const MyVocabulary: FC<TMyVocabularyProps> = ({ myVocabularyCollections }) => {
-    myVocabularyCollections.entries().forEach((value, key)=>{
-        console.log(key, value)
-    })
+    // myVocabularyCollections.entries().forEach((value, key)=>{
+    //     console.log(key, value)
+    // })
     return (
         <div>
             {/* {myVocabularyCollections.entries().map((words, collectionName) => <MyVocabularyCollection name={collectionName} words={words}/>)} */}
