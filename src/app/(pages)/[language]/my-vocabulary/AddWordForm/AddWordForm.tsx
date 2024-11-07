@@ -7,9 +7,7 @@ import { TWord, TTextEntryToLanguage } from '@/app/api/_models/Word'
 import { ChangeEvent, useState } from 'react'
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 import TranslationInputLabel from './TranslationInputLabel'
-import getNotSupportedLanguageError from '@/app/_utils/getError/getNotSupportedLanguageError'
 import { fetchAddWord } from '@/app/_utils/apiCalls/myVocabulary/fetchAddWord'
-import { TAddWordReqData } from '@/app/api/(routes)/my-vocabulary/word/route'
 
 const AddWordForm = () => {
 
