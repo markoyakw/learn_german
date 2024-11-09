@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/app/api/_utils/connectDB';
 import SessionService from '@/app/api/_services/SessionService';
-import handleUnknownError from '@/app/_utils/backend/handleUnknownError';
+import handleCaughtErrorInApiRoute from '@/app/_utils/backend/handleCaughtErrorInApiRoute';
 import { TNextRes } from '@/app/_types/types';
 
 export type TLogoutResData = {
@@ -15,6 +15,6 @@ export async function GET(): Promise<TNextRes<TLogoutResData>> {
         SessionService.deleteSessionData(response)
         return response
     } catch (e) {
-        return handleUnknownError(e)
+        return handleCaughtErrorInApiRoute(e)
     }
 }

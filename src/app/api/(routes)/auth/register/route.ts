@@ -2,8 +2,8 @@ import bcrypt from 'bcryptjs';
 import { NextResponse } from 'next/server';
 import User from '@/app/api/_models/User';
 import connectDB from '@/app/api/_utils/connectDB';
-import handleUnknownError from '@/app/_utils/backend/handleUnknownError';
-import { TNextRes, TErrorRes } from '@/app/_types/types';
+import handleCaughtErrorInApiRoute from '@/app/_utils/backend/handleCaughtErrorInApiRoute';
+import { TNextRes } from '@/app/_types/types';
 
 export type TRegisterReqData = {
     login: string,
@@ -30,14 +30,6 @@ export async function POST(req: Request): Promise<TNextRes<TRegisterResData>> {
         return NextResponse.json({ message: "Client was registered successfully" })
 
     } catch (e) {
-        console.log(e);
-        if (e instanceof Error && e.name === "ValidationError") {
-            // Object.keys(e.errors).map((e) => {
-            //     const error = e as unknown as TErrorRes
-            //     return { path: error.path, message: error.message, name: error.name }
-            // })
-            return NextResponse.json(e, { status: 400 });
-        }
-        return handleUnknownError(e)
+        return handleCaughtErrorInApiRoute(e)
     }
 }

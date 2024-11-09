@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import User, { TUser } from "../../_models/User"
 import SessionService from '../../_services/SessionService';
-import handleUnknownError from "@/app/_utils/backend/handleUnknownError";
+import handleCaughtErrorInApiRoute from "@/app/_utils/backend/handleCaughtErrorInApiRoute";
 import { TNextRes } from "@/app/_types/types";
 
 export const GET = async (request: Request) => {
@@ -24,6 +24,6 @@ export const PATCH = async (req: Request): Promise<TNextRes<TPatchUserResData>> 
         return NextResponse.json({ message: "User information was successfully updated", newUserData })
     }
     catch (e) {
-        return handleUnknownError(e)
+        return handleCaughtErrorInApiRoute(e)
     }
 }

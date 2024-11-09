@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import connectDB from '@/app/api/_utils/connectDB';
 import Word, { TWord } from '@/app/api/_models/Word';
 import User from '@/app/api/_models/User';
 import SessionService from '@/app/api/_services/SessionService';
-import handleUnknownError from '@/app/_utils/backend/handleUnknownError';
+import handleCaughtErrorInApiRoute from '@/app/_utils/backend/handleCaughtErrorInApiRoute';
 import { TNextRes } from '@/app/_types/types';
 
 export type TAddWordReqData = {
@@ -35,7 +35,7 @@ export async function POST(req: Request): Promise<TNextRes<TAddWordResData>> {
         if (e instanceof Error && e.name === "ValidationError") {
             return NextResponse.json({ message: e.message, name: e.name }, { status: 400 });
         }
-        return handleUnknownError(e)
+        return handleCaughtErrorInApiRoute(e)
     }
 }
 

@@ -4,7 +4,7 @@ import User from '@/app/api/_models/User';
 import connectDB from '@/app/api/_utils/connectDB';
 import SessionService from '@/app/api/_services/SessionService';
 import { TNextRes } from '@/app/_types/types';
-import handleUnknownError from '@/app/_utils/backend/handleUnknownError';
+import handleCaughtErrorInApiRoute from '@/app/_utils/backend/handleCaughtErrorInApiRoute';
 
 export type TJWTPayload = {
     id: string,
@@ -40,6 +40,6 @@ export async function POST(req: Request): Promise<TNextRes<TLoginResData>> {
         SessionService.setSessionData(response, JWTPayload)
         return response
     } catch (e) {
-        return handleUnknownError(e)
+        return handleCaughtErrorInApiRoute(e)
     }
 }

@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { TAppLanguage, TNextRes } from '../../../../_types/types';
 import { NextResponse } from "next/server";
 import { SUPPORTED_LANGUAGES } from '@/app/constants';
-import handleUnknownError from '@/app/_utils/backend/handleUnknownError';
+import handleCaughtErrorInApiRoute from '@/app/_utils/backend/handleCaughtErrorInApiRoute';
 
 type TSetLanguageReqBody = {
     newLanguage: string
@@ -30,6 +30,6 @@ export async function POST(req: Request): Promise<TNextRes<TSetLanguageRes>> {
         })
     }
     catch (e) {
-        return handleUnknownError(e)
+        return handleCaughtErrorInApiRoute(e)
     }
 }

@@ -25,10 +25,18 @@ export type TNextPageWithParams<
 
 export type TErrorNames = "ValidationError" | "AuthenticationError" | "AuthorizationError" | "NotFoundError" | "InternalServerError"
 
-export type TErrorRes = {
+export type TError = {
     name: TErrorNames,
     message: string,
-    status: number
+    path?: string
 }
 
-export type TNextRes<ResData> = NextResponse<ResData | TErrorRes>
+export type TErrorResponse = (TError | TError[]) & { status?: string }
+
+export type TValidationError = {
+    errors: {
+        [key: string]: TError
+    }
+}
+
+export type TNextRes<ResData> = NextResponse<ResData | TErrorResponse>
