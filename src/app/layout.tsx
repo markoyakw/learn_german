@@ -7,6 +7,7 @@ import LanguageSelector from "./_components/Header/LanguageSelector/LanguageSele
 import { cookies } from "next/headers";
 import { TAppLanguage } from "./_types/types";
 import Link from "next/link";
+import classes from "./layout.module.css"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,14 +26,14 @@ export default async function RootLayout({
   const appLanguage = await cookies().get("app-language")?.value as TAppLanguage
 
   return (
-    <html lang={appLanguage}>
-      <body className={inter.className}>
+    <html lang={appLanguage} className={classes["html"]}>
+      <body className={`${inter.className} ${classes["layout"]}`} >
         <Header appLanguageCookie={appLanguage}>
-          <Link href={`/${appLanguage}/my-vocabulary`}>my vocabulary</Link>
-          <Link href={`/${appLanguage}/auth/login`}>login</Link>
           <LanguageSelector />
         </Header>
-        {children}
+        <main className={classes["layout__main"]}>
+          {children}
+        </main>
       </body>
     </html>
   );

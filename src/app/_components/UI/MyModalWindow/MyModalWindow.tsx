@@ -1,6 +1,7 @@
 import React, { MouseEvent, ReactNode, useEffect, useRef } from 'react'
 import classes from "./MyModalWindow.module.css"
 import MyIconButton from '../MyIconButton'
+import MyCard from '../MyCard/MyCard'
 
 interface IMyModalWindowProps {
     isOpen: boolean,
@@ -35,7 +36,7 @@ const MyModalWindow: React.FC<IMyModalWindowProps> = ({ isOpen, children, toggle
 
     return (
         <div className={modalAreaAround} onClick={handleClickOutsideOfModalWindow} ref={areaAroundModalRef}>
-            <div className={classes["modal__window"]}>
+            <MyCard backgroundColor='white'>
                 <div className={classes["modal__header"]}>
                     <h3>{header}</h3>
                     <MyIconButton iconType='cross' onClick={toggleWindow} />
@@ -43,7 +44,7 @@ const MyModalWindow: React.FC<IMyModalWindowProps> = ({ isOpen, children, toggle
                 <div className={classes["modal__body"]}>
                     {children}
                 </div>
-            </div>
+            </MyCard>
         </div>
     )
 }

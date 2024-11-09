@@ -1,0 +1,12 @@
+.link-card__icon {
+    font-size: 140px;
+}
+
+.link-card__label{
+    color: white;
+}
+
+.link-card__label,
+.link-card__icon {
+    align-self: center;
+}

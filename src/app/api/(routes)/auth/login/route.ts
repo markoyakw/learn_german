@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 import User from '@/app/api/_models/User';
 import connectDB from '@/app/api/_utils/connectDB';
 import SessionService from '@/app/api/_services/SessionService';
+import { TNextRes } from '@/app/_types/types';
+import handleUnknownError from '@/app/_utils/backend/handleUnknownError';
 
 export type TJWTPayload = {
     id: string,
@@ -17,7 +19,7 @@ export type TLoginResData = {
     message: string
 }
 
-export async function POST(req: Request): Promise<NextResponse<TLoginResData>> {
+export async function POST(req: Request): Promise<TNextRes<TLoginResData>> {
     try {
         connectDB()
         const data = await req.json()
@@ -25,10 +27,10 @@ export async function POST(req: Request): Promise<NextResponse<TLoginResData>> {
         const user = await User.findOne({ login })
 
         if (!user) {
-            return NextResponse.json({ message: `User with login "${login}" does not exist` }, { status: 400 })
+            return NextResponse.json({ name: "ValidationError", message: `User with login ${login} does not exist` }, { status: 400 })
         }
         if (!bcrypt.compareSync(password, user.password)) {
-            return NextResponse.json({ message: "Wrong password" }, { status: 400 })
+            return NextResponse.json({ name: "ValidationError", message: "Wrong password" }, { status: 400 })
         }
 
         const JWTPayload: TJWTPayload = {
@@ -38,7 +40,6 @@ export async function POST(req: Request): Promise<NextResponse<TLoginResData>> {
         SessionService.setSessionData(response, JWTPayload)
         return response
     } catch (e) {
-        console.log(e);
-        return NextResponse.json({ message: 'Error occurred' }, { status: 500 });
+        return handleUnknownError(e)
     }
 }

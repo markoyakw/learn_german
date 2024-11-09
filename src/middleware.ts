@@ -2,9 +2,9 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
 import { TAppLanguage } from './app/_types/types';
-import { getLanguageCookieFallback } from './app/_serverActions/getLanguageCookie';
 import getLanguageFromUrlPathname from './app/_utils/url/getLanguageFromUrl';
 import SessionService from './app/api/_services/SessionService';
+import getPreferredBrowserLanguage from './app/_serverActions/getPreferredBrowserLanguage';
 
 const middlewarePathnameMatcher = (currentPathname: string, matchingPathnameArr: string[]) => {
     return matchingPathnameArr.some(path => currentPathname.startsWith(path))
@@ -28,8 +28,13 @@ export async function middleware(request: NextRequest) {
                 }
             }
             catch (e) {
-                const language = languageCookie || await getLanguageCookieFallback()
-                const response = NextResponse.redirect(new URL(`/${language}/auth/login`, request.url))
+                const language = languageCookie || await getPreferredBrowserLanguage()
+                const redirectUrl = new URL(`/${language}/auth/login`, request.url)
+                
+                //set where to redirect user after successfull login
+                redirectUrl.searchParams.set("redirect", reqPathname)
+
+                const response = NextResponse.redirect(redirectUrl)
                 await SessionService.deleteSessionData(response)
                 if (!languageCookie) {
                     await response.cookies.set("app-language", language)

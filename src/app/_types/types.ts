@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 import { NextPage } from "next";
 import { SUPPORTED_LANGUAGES } from "../constants";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
@@ -20,4 +21,14 @@ export type TNextPageWithParams<
     }
 >
 
-export type TNewCookiesMap = Map<string, { value: string, options?: Partial<ResponseCookie> }>
+// export type TNewCookiesMap = Map<string, { value: string, options?: Partial<ResponseCookie> }>
+
+export type TErrorNames = "ValidationError" | "AuthenticationError" | "AuthorizationError" | "NotFoundError" | "InternalServerError"
+
+export type TErrorRes = {
+    name: TErrorNames,
+    message: string,
+    status: number
+}
+
+export type TNextRes<ResData> = NextResponse<ResData | TErrorRes>

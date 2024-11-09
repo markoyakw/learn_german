@@ -5,6 +5,29 @@ html {
     --font-size-m: 20px;
     --font-size-l: 28px;
     --font-size-xl: 36px;
+
+    --color-primary: #007bff;
+    --color-primary-light: #66b2ff;
+    --color-primary-dark: #0056b3;
+
+    --color-secondary: #6c757d;
+    --color-secondary-light: #a1a5aa;
+    --color-secondary-dark: #495057;
+
+    --color-accent: #ffc107;
+    --color-accent-light: #ffe08a;
+    --color-accent-dark: #ffb000;
+
+    --color-background: #ffffff;
+    --color-surface: #f8f9fa;
+    /* cards or sections */
+    --color-border: #dee2e6;
+    --color-text-primary: #343a40;
+    --color-text-secondary: #6c757d;
+
+    --color-success: #28a745;
+    --color-warning: #ffc107;
+    --color-error: #dc3545;
 }
 
 h1 {
@@ -15,4 +38,10 @@ h1 {
 h2 {
     font-size: var(--font-size-l);
     font-weight: bold;
+}
+
+a,
+a:link,
+a:visited {
+    color: var(--color-text-primary);
 }

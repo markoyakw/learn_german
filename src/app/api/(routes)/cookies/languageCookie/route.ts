@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers';
-import { TAppLanguage } from '../../../../_types/types';
+import { TAppLanguage, TNextRes } from '../../../../_types/types';
 import { NextResponse } from "next/server";
 import { SUPPORTED_LANGUAGES } from '@/app/constants';
+import handleUnknownError from '@/app/_utils/backend/handleUnknownError';
 
 type TSetLanguageReqBody = {
     newLanguage: string
@@ -12,7 +13,7 @@ export type TSetLanguageRes = {
     newLanguageCookie?: TAppLanguage
 }
 
-export async function POST(req: Request): Promise<NextResponse<TSetLanguageRes>> {
+export async function POST(req: Request): Promise<TNextRes<TSetLanguageRes>> {
     try {
         const body: TSetLanguageReqBody = await req.json()
         if (!body) {
@@ -29,7 +30,6 @@ export async function POST(req: Request): Promise<NextResponse<TSetLanguageRes>>
         })
     }
     catch (e) {
-        console.log(e)
-        return NextResponse.json({ message: `Language cookie setting error: ${e}` }, { status: 500 })
+        return handleUnknownError(e)
     }
 }

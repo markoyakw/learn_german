@@ -1,3 +1,4 @@
+"use client"
 import React, { useRef, useState } from 'react'
 import useSpeechSynthesis from '@/app/_hooks/useSpeechSynthesis'
 import DualSliderWithSetSteps from './DualSliderWithSetSteps'

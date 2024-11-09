@@ -3,6 +3,8 @@ import connectDB from '@/app/api/_utils/connectDB';
 import Word, { TWord } from '@/app/api/_models/Word';
 import User from '@/app/api/_models/User';
 import SessionService from '@/app/api/_services/SessionService';
+import handleUnknownError from '@/app/_utils/backend/handleUnknownError';
+import { TNextRes } from '@/app/_types/types';
 
 export type TAddWordReqData = {
     newWord: TWord,
@@ -10,7 +12,7 @@ export type TAddWordReqData = {
 }
 export type TAddWordResData = { message: string, newWord?: TWord }
 
-export async function POST(req: Request): Promise<NextResponse<TAddWordResData>> {
+export async function POST(req: Request): Promise<TNextRes<TAddWordResData>> {
     try {
         connectDB()
         const { newWord, collectionName }: TAddWordReqData = await req.json()
@@ -31,9 +33,9 @@ export async function POST(req: Request): Promise<NextResponse<TAddWordResData>>
     } catch (e) {
         console.log(e);
         if (e instanceof Error && e.name === "ValidationError") {
-            return NextResponse.json({ message: e.message }, { status: 500 });
+            return NextResponse.json({ message: e.message, name: e.name }, { status: 400 });
         }
-        return NextResponse.json({ message: "Error occurred" }, { status: 500 });
+        return handleUnknownError(e)
     }
 }
 

@@ -1,19 +1,20 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/app/api/_utils/connectDB';
 import SessionService from '@/app/api/_services/SessionService';
+import handleUnknownError from '@/app/_utils/backend/handleUnknownError';
+import { TNextRes } from '@/app/_types/types';
 
 export type TLogoutResData = {
     message: string
 }
 
-export async function GET(): Promise<NextResponse<TLogoutResData>> {
+export async function GET(): Promise<TNextRes<TLogoutResData>> {
     try {
         connectDB()
         const response = NextResponse.json({ message: "User logged out successfully" })
         SessionService.deleteSessionData(response)
         return response
     } catch (e) {
-        console.log(e);
-        return NextResponse.json({ message: 'Error occurred' }, { status: 500 });
+        return handleUnknownError(e)
     }
 }
