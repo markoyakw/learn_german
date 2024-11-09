@@ -8,8 +8,9 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import classes from "./loginPage.module.css"
 import { useRouter } from 'next/navigation'
-import { TErrorResponse, TNextPageWithParams } from '@/app/_types/types'
+import { TNextPageWithParams } from '@/app/_types/types'
 import isErrorResponse from '@/app/_utils/apiCalls/isErrorResponse'
+import addErrorsFromResToForm from '@/app/_utils/form/addErrorsFromResToForm'
 
 const Login: TNextPageWithParams<{}, { redirect: string }> = ({ params, searchParams }) => {
 
@@ -17,10 +18,12 @@ const Login: TNextPageWithParams<{}, { redirect: string }> = ({ params, searchPa
     const router = useRouter()
     const onSubmit = async (loginData: TLoginReqData) => {
         const res = await fetchLogin(loginData)
-        const redirectAfterLogin = searchParams.redirect
-        if (redirectAfterLogin) {
-            router.replace(redirectAfterLogin)
+        if (isErrorResponse(res)) {
+            addErrorsFromResToForm(res, setError, getValues)
+            return
         }
+        const redirectAfterLogin = searchParams.redirect || "/"
+        router.replace(redirectAfterLogin)
     }
 
     return (
