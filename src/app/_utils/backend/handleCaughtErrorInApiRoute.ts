@@ -7,12 +7,14 @@ const handleValidationError = (validationError: TValidationError) => {
         const error = errorsObj[errorKey]
         return { path: error.path, message: error.message, name: error.name }
     })
-    return NextResponse.json(errorArr, { status: 400 });
+    return NextResponse.json({ errorArr }, { status: 400 });
 }
 
 const handleUnknownError = (e: unknown) => {
     console.error("Login error: ", e)
-    const response = NextResponse.json({ name: "InternalServerError", message: "Unknown error, try again later or contact app support" }, { status: 500 })
+    const response = NextResponse.json({
+        errorArr: [{ name: "InternalServerError", message: "Unknown error, try again later or contact app support" }]
+    }, { status: 500 })
     return response as NextResponse<TErrorResponse>
 }
 

@@ -22,7 +22,9 @@ export async function POST(req: Request): Promise<TNextRes<TRegisterResData>> {
         const { login, password, language } = data
         const existingUser = await User.findOne({ login })
         if (existingUser) {
-            return NextResponse.json({ name: "ValidationError", message: `User with login ${login} already exists` }, { status: 400 })
+            return NextResponse.json({
+                errorArr: [{ name: "ValidationError", message: `User with login "${login}" already exists` }]
+            }, { status: 400 })
         }
         const hashPassword = bcrypt.hashSync(password, 7);
         const user = new User({ login, password: hashPassword, language })

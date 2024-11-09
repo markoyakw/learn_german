@@ -16,12 +16,14 @@ export type TSetLanguageRes = {
 export async function POST(req: Request): Promise<TNextRes<TSetLanguageRes>> {
     try {
         const body: TSetLanguageReqBody = await req.json()
-        if (!body) {
-            return NextResponse.json({ message: "Request does not have a body" }, { status: 400 })
-        }
-        const newLanguage = body.newLanguage.toLowerCase() as TAppLanguage
+        const newLanguage = body?.newLanguage?.toLowerCase() as TAppLanguage
         if (!SUPPORTED_LANGUAGES.includes(newLanguage)) {
-            return NextResponse.json({ message: `Setting ${newLanguage} as language cookie is not possible. Supported languages are ${SUPPORTED_LANGUAGES}` }, { status: 400 })
+            return NextResponse.json({
+                errorArr: [{
+                    name: "ValidationError",
+                    message: `Setting ${newLanguage} as language cookie is not possible. Supported languages are ${SUPPORTED_LANGUAGES}`
+                }]
+            }, { status: 500 })
         }
         await cookies().set("app-language", newLanguage)
         return NextResponse.json({

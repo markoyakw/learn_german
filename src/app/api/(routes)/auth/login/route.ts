@@ -27,10 +27,15 @@ export async function POST(req: Request): Promise<TNextRes<TLoginResData>> {
         const user = await User.findOne({ login })
 
         if (!user) {
-            return NextResponse.json({ name: "ValidationError", message: `User with login ${login} does not exist` }, { status: 400 })
+            return NextResponse.json({
+                errorArr: [{ name: "ValidationError", message: `User with login "${login}" does not exist`, path: "login" }]
+            }, { status: 400 })
         }
+
         if (!bcrypt.compareSync(password, user.password)) {
-            return NextResponse.json({ name: "ValidationError", message: "Wrong password" }, { status: 400 })
+            return NextResponse.json({
+                errorArr: [{ name: "ValidationError", message: "Wrong password", path: "password" }]
+            }, { status: 400 })
         }
 
         const JWTPayload: TJWTPayload = {

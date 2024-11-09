@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { NextPage } from "next";
 import { SUPPORTED_LANGUAGES } from "../constants";
-import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export type TAppLanguage = typeof SUPPORTED_LANGUAGES[number]
 
@@ -28,10 +27,10 @@ export type TErrorNames = "ValidationError" | "AuthenticationError" | "Authoriza
 export type TError = {
     name: TErrorNames,
     message: string,
-    path?: string
+    path?: string,
 }
 
-export type TErrorResponse = (TError | TError[]) & { status?: string }
+export type TErrorResponse = { errorArr: TError[] }
 
 export type TValidationError = {
     errors: {

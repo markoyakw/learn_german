@@ -8,11 +8,12 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import classes from "./loginPage.module.css"
 import { useRouter } from 'next/navigation'
-import { TNextPageWithParams } from '@/app/_types/types'
+import { TErrorResponse, TNextPageWithParams } from '@/app/_types/types'
+import isErrorResponse from '@/app/_utils/apiCalls/isErrorResponse'
 
 const Login: TNextPageWithParams<{}, { redirect: string }> = ({ params, searchParams }) => {
 
-    const { register, handleSubmit, watch, control, formState } = useForm<TLoginReqData>()
+    const { register, handleSubmit, watch, control, formState, setError, getValues } = useForm<TLoginReqData>()
     const router = useRouter()
     const onSubmit = async (loginData: TLoginReqData) => {
         const res = await fetchLogin(loginData)
@@ -31,11 +32,13 @@ const Login: TNextPageWithParams<{}, { redirect: string }> = ({ params, searchPa
                         id="login-input"
                         label="Login"
                     />
+                    <>{formState.errors.login?.message}</>
                     <MyInput
                         {...register("password")}
                         id="password-input"
                         label="Password"
                     />
+                    <>{formState.errors.password?.message}</>
                     <MyButton type='submit'>Login</MyButton>
                 </MyCard>
             </form>

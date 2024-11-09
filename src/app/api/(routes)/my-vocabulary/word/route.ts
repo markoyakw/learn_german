@@ -17,10 +17,20 @@ export async function POST(req: Request): Promise<TNextRes<TAddWordResData>> {
         connectDB()
         const { newWord, collectionName }: TAddWordReqData = await req.json()
         if (!collectionName) {
-            return NextResponse.json({ message: "No word collection name was provided" }, { status: 400 })
+            return NextResponse.json({
+                errorArr: [{
+                    name: "ValidationError",
+                    message: "No word collection name was provided"
+                }]
+            }, { status: 400 })
         }
         if (!newWord) {
-            return NextResponse.json({ message: "New word was not provided" }, { status: 400 })
+            return NextResponse.json({
+                errorArr: [{
+                    name: "ValidationError",
+                    message: "New word was not provided"
+                }]
+            }, { status: 400 })
         }
         const newWordMongooseObj = await new Word(newWord)
         await newWordMongooseObj.save()
@@ -31,10 +41,6 @@ export async function POST(req: Request): Promise<TNextRes<TAddWordResData>> {
         return NextResponse.json({ message: "New word has been added successfully", newWord: newWordMongooseObj })
 
     } catch (e) {
-        console.log(e);
-        if (e instanceof Error && e.name === "ValidationError") {
-            return NextResponse.json({ message: e.message, name: e.name }, { status: 400 });
-        }
         return handleCaughtErrorInApiRoute(e)
     }
 }

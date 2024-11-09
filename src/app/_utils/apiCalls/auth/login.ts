@@ -14,12 +14,14 @@ const fetchLogin = async (loginData: TLoginReqData): Promise<TLoginResData | TEr
         })
         const parsedRes = await res.json()
         if (!res.ok) {
-            throw new Error(parsedRes.message).name()
+            const errorRes = parsedRes as TErrorResponse
+            throw errorRes
         }
         return parsedRes
     }
     catch (e) {
-        return { error: "Login error, try later of contact support" }
+        const typedError = e as unknown as TErrorResponse
+        return typedError
     }
 }
 
