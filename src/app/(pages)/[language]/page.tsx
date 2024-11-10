@@ -14,7 +14,7 @@ const page: TNextPageWithParams = ({ params, searchParams }) => {
     }
 
     return (
-        <>
+        <div className={classes["home-page__container"]}>
             <div className={classes["home-page__title"]}>
                 <h1>Skills to pump!</h1>
             </div>
@@ -35,7 +35,7 @@ const page: TNextPageWithParams = ({ params, searchParams }) => {
                     Excersizes
                 </HomepageLinkCard>
             </MyGrid>
-        </ >
+        </div>
     )
 }
 

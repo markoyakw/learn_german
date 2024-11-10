@@ -1,6 +1,6 @@
 import { TAppLanguage } from "@/app/_types/types"
 import { SUPPORTED_LANGUAGES } from "@/app/constants"
-import getLanguageFromUrlPathname from "./getLanguageFromUrl"
+import getLanguageFromUrlPathname from "./getLanguageFromPathname"
 
 const getUrlPathnameWithChangedLanguage = (URL: string, newLanguage: TAppLanguage): string => {
     const appLanguage = getLanguageFromUrlPathname(URL) as TAppLanguage | undefined

@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/_my-vocabulary/test"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/_my-vocabulary/test", "src/app/(pages)/[language]/@bebra/page.tsx"],
   "exclude": ["node_modules"]
 }

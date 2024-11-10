@@ -7,14 +7,17 @@ import { TAppLanguage } from '@/app/_types/types'
 
 interface IHeaderProps {
     children: ReactNode,
-    appLanguageCookie: TAppLanguage
+    appLanguageCookie: TAppLanguage,
+    wrapClassName: string | null
 }
 
-const Header: React.FC<IHeaderProps> = ({ children, appLanguageCookie }) => {
+const Header: React.FC<IHeaderProps> = ({ children, appLanguageCookie, wrapClassName }) => {
     return (
         <AppLanguageProvider initialValue={appLanguageCookie}>
-            <div className={classes["header"]}>
-                {children}
+            <div className={classes["header-container"]}>
+                <div className={`${classes["header"]} ${wrapClassName}`}>
+                    {children}
+                </div>
             </div>
         </AppLanguageProvider >
     )

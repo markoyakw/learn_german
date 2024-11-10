@@ -21,9 +21,14 @@ html {
     --color-background: #ffffff;
     --color-surface: #f8f9fa;
     /* cards or sections */
+
     --color-border: #dee2e6;
-    --color-text-primary: #343a40;
+    --color-text-primary: #ffffff;
     --color-text-secondary: #6c757d;
+
+    /* --color-border: #dee2e6;
+    --color-text-primary: #343a40;
+    --color-text-secondary: #6c757d; */
 
     --color-success: #28a745;
     --color-warning: #ffc107;

@@ -16,6 +16,7 @@ const Login: TNextPageWithParams<{}, { redirect: string }> = ({ params, searchPa
 
     const { register, handleSubmit, watch, control, formState, setError, getValues } = useForm<TLoginReqData>()
     const router = useRouter()
+    
     const onSubmit = async (loginData: TLoginReqData) => {
         const res = await fetchLogin(loginData)
         if (isErrorResponse(res)) {

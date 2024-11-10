@@ -2,9 +2,10 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
 import { TAppLanguage } from './app/_types/types';
-import getLanguageFromUrlPathname from './app/_utils/url/getLanguageFromUrl';
+import getLanguageFromUrlPathname from './app/_utils/url/getLanguageFromPathname';
 import SessionService from './app/api/_services/SessionService';
 import getPreferredBrowserLanguage from './app/_serverActions/getPreferredBrowserLanguage';
+import getPathnameWithoutLanguage from './app/_utils/url/getUrlWithoutLanguage';
 
 const middlewarePathnameMatcher = (currentPathname: string, matchingPathnameArr: string[]) => {
     return matchingPathnameArr.some(path => currentPathname.startsWith(path))
@@ -16,7 +17,7 @@ export async function middleware(request: NextRequest) {
         let response = NextResponse.next()
 
         const reqPathname = request.nextUrl.pathname
-        const reqPathnameWithNoLanguage = "/" + reqPathname.split("/").toSpliced(0, 2).join("/")
+        const reqPathnameWithNoLanguage = getPathnameWithoutLanguage(reqPathname)
         const URLLanguage = getLanguageFromUrlPathname(reqPathname)
 
         // verify session and redirect to login page if it's invalid
@@ -30,7 +31,7 @@ export async function middleware(request: NextRequest) {
             catch (e) {
                 const language = languageCookie || await getPreferredBrowserLanguage()
                 const redirectUrl = new URL(`/${language}/auth/login`, request.url)
-                
+
                 //set where to redirect user after successfull login
                 redirectUrl.searchParams.set("redirect", reqPathname)
 
