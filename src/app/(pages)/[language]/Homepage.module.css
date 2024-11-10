@@ -1,7 +1,3 @@
-.home-page__title {
-    padding: var(--spacing-m) 0px;
-}
-
 .home-page__container{
     display: flex;
     flex-direction: column;

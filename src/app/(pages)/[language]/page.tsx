@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 import classes from "./Homepage.module.css"
 import HomepageLinkCard from '@/app/_components/PagesComponents/HomepageLinkCard'
+import PageHeaderTitle from '@/app/_components/Header/PageHeaderTitle/PageHeaderTitle'
 
 const page: TNextPageWithParams = ({ params, searchParams }) => {
 
@@ -15,9 +16,7 @@ const page: TNextPageWithParams = ({ params, searchParams }) => {
 
     return (
         <div className={classes["home-page__container"]}>
-            <div className={classes["home-page__title"]}>
-                <h1>Skills to pump!</h1>
-            </div>
+            <PageHeaderTitle>Pump your skills!</PageHeaderTitle>
             <MyGrid>
                 <HomepageLinkCard href={`/${appLanguage}/numbers`} backgroundColor='#5D61C0' icon='🔢'>
                     Learn numbers

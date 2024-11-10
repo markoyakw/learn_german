@@ -14,10 +14,8 @@ interface IHeaderProps {
 const Header: React.FC<IHeaderProps> = ({ children, appLanguageCookie, wrapClassName }) => {
     return (
         <AppLanguageProvider initialValue={appLanguageCookie}>
-            <div className={classes["header-container"]}>
-                <div className={`${classes["header"]} ${wrapClassName}`}>
-                    {children}
-                </div>
+            <div className={`${classes["header"]} ${wrapClassName}`}>
+                {children}
             </div>
         </AppLanguageProvider >
     )

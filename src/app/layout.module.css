@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--color-background);
 }
 
 .html {
@@ -18,5 +19,5 @@
 }
 
 .layout__content-wrap {
-    width: 1080px;
+    width: 980px;
 }

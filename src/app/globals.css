@@ -1,4 +1,6 @@
 html {
+    --header-height: 100px;
+
     --spacing-m: 20px;
     --spacing-s: 16px;
     --spacing-xs: 12px;
@@ -18,7 +20,7 @@ html {
     --color-accent-light: #ffe08a;
     --color-accent-dark: #ffb000;
 
-    --color-background: #ffffff;
+    --color-background: black;
     --color-surface: #f8f9fa;
     /* cards or sections */
 

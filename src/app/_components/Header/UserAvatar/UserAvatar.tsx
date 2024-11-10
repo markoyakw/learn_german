@@ -1,9 +1,9 @@
 import React from 'react'
-import classes from "./UserAvatar.module.css"
+import classes from "../header.module.css"
 
 const UserAvatar = () => {
     return (
-        <div className={classes["user-avatar"]}>🧟‍♂️</div>
+        <div className={classes["header__user-avatar"]}>🧟‍♂️</div>
     )
 }
 

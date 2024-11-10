@@ -6,6 +6,7 @@ import MyModalWindow from '@/app/_components/UI/MyModalWindow/MyModalWindow'
 import { AppLanguageProvider } from '@/app/_hooks/useAppLanguageContext'
 import { NextPage } from 'next'
 import { TAppLanguage, TPageSearchParams } from '@/app/_types/types'
+import PageHeaderTitle from '@/app/_components/Header/PageHeaderTitle/PageHeaderTitle'
 
 type TMyVocabularyProps = {
     params: { language: TAppLanguage },
@@ -26,6 +27,7 @@ const MyVocabulary: NextPage<TMyVocabularyProps> = (props) => {
     return (
         <AppLanguageProvider initialValue={props.params.language}>
             <div>
+                <PageHeaderTitle>Your vocabulary:</PageHeaderTitle>
                 <MyButton onClick={handleAddWordWindowToggle}>Add word</MyButton>
                 <MyModalWindow isOpen={isAddWordWindowOpen} toggleWindow={handleAddWordWindowToggle} header={"Add new word"}>
                     <AddWordForm />
