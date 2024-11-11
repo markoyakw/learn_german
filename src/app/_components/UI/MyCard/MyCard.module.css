@@ -6,7 +6,3 @@
     padding: var(--spacing-m);
     border-radius: 20px;
 }
-
-.card * {
-    margin: var(--spacing-xs) 0px
-}

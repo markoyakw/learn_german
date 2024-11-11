@@ -1,9 +1,9 @@
 .header {
     position: absolute;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     margin-top: var(--spacing-m);
-    align-items: start;
+    align-items: flex-start;
 }
 
 .header__title {
@@ -11,12 +11,13 @@
     width: 100%;
     height: var(--header-height);
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     margin-top: var(--spacing-m);
     margin-bottom: calc(var(--spacing-m));
 }
 
 .header__user-avatar {
+    cursor: pointer;
     width: var(--header-height);
     height: var(--header-height);
     display: flex;
@@ -29,6 +30,5 @@
     overflow: hidden;
     background: rgb(255, 201, 130);
     background: linear-gradient(331deg, rgba(255, 201, 130, 1) 18%, rgba(189, 84, 186, 1) 65%, rgba(181, 46, 169, 1) 78%, rgba(45, 219, 255, 1) 100%);
-    pointer-events: none;
     user-select: none;
 }

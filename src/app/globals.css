@@ -35,6 +35,7 @@ html {
     --color-success: #28a745;
     --color-warning: #ffc107;
     --color-error: #dc3545;
+    --color-disabled: #a1a1a1;
 }
 
 h1 {

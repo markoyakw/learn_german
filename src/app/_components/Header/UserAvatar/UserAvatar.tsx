@@ -1,9 +1,12 @@
 import React from 'react'
 import classes from "../header.module.css"
+import Link from 'next/link'
 
 const UserAvatar = () => {
     return (
-        <div className={classes["header__user-avatar"]}>🧟‍♂️</div>
+        <Link href={"/account"} className={classes["header__user-avatar"]}>
+            🧟‍♂️
+        </Link>
     )
 }
 
