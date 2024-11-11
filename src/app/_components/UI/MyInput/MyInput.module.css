@@ -1,15 +1,50 @@
-.input {
-    --input-color: lightgray;
+.input__container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .input {
+    --input-color: lightgray;
     border: 2px solid var(--input-color);
     border-radius: 15px;
     height: 50px;
     font-size: var(--font-size-m);
-    padding: 0px var(--spacing-xs);
+    padding: 10px var(--spacing-xs);
+    width: 100%;
+    background-color: white;
+    outline: none;
 }
 
 .input:focus {
-    background-color: rgba(var(--input-color), 0.5);
+    background-color: rgba(var(--input-color), 0.1);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 5px var(--color-accent);
+}
+
+.label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: var(--font-size-s);
+    color: var(--input-color);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input:focus + .label,
+.input:not(:placeholder-shown) + .label {
+    top: -10px;
+    left: 10px;
+    font-size: var(--font-size-xs);
+    color: var(--color-accent); 
+}
+
+.input:focus {
+    border-bottom: 2px solid var(--color-accent);
+}
+
+.input:focus + .label {
+    color: var(--color-accent);
 }
