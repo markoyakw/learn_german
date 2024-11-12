@@ -4,9 +4,10 @@ import classes from "./MyInput.module.css"
 interface MyInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label: ReactNode,
     id: string,
+    error?: string
 }
 
-const MyInput = forwardRef<HTMLInputElement, MyInputProps>(({ id, label, onChange, autoComplete = "off", ...props }, ref) => {
+const MyInput = forwardRef<HTMLInputElement, MyInputProps>(({ id, label, onChange, autoComplete = "off", error, ...props }, ref) => {
 
     const [inputValue, setInputValue] = useState<string>("")
 
@@ -19,18 +20,20 @@ const MyInput = forwardRef<HTMLInputElement, MyInputProps>(({ id, label, onChang
 
     return (
         <div className={classes["input__container"]}>
-            <input 
-                ref={ref} 
-                onChange={handleInputChange} 
+            <input
+                ref={ref}
+                onChange={handleInputChange}
                 value={inputValue}
-                className={classes["input"]} 
-                {...props} 
-                id={id} 
-                autoComplete={autoComplete} 
+                className={classes["input"]}
+                {...props}
+                id={id}
+                autoComplete={autoComplete}
+                placeholder=""
             />
-            <label htmlFor={id} className={classes["label"]}>
+            <label htmlFor={id} className={classes["input__label"]}>
                 {label}
             </label>
+            {error && <div className={classes["input__error"]}>⚠ {error}</div>}
         </div>
     )
 })

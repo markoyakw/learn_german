@@ -11,6 +11,8 @@ import { useRouter } from 'next/navigation'
 import { TNextPageWithParams } from '@/app/_types/types'
 import isErrorResponse from '@/app/_utils/apiCalls/isErrorResponse'
 import addErrorsFromResToForm from '@/app/_utils/form/addErrorsFromResToForm'
+import myCardClasses from "@/app/_components/UI/MyCard/MyCard.module.css"
+import MyText from '@/app/_components/UI/MyText/MyText'
 
 const Login: TNextPageWithParams<{}, { redirect: string }> = ({ params, searchParams }) => {
 
@@ -44,21 +46,35 @@ const Login: TNextPageWithParams<{}, { redirect: string }> = ({ params, searchPa
         <div className={classes["login-form__container"]}>
             <form onSubmit={handleSubmit(onSubmit)} className={classes["login-form"]}>
                 <MyCard backgroundColor='var(--color-primary)'>
-                    <MyInput
-                        {...register("login")}
-                        id="login-input"
-                        label="Login"
-                    />
-                    <>{formState.errors.login?.message}</>
-                    <MyInput
-                        {...register("password")}
-                        id="password-input"
-                        label="Password"
-                    />
-                    <>{formState.errors.password?.message}</>
-                    <MyButton type='submit' loading={isLoading}>
-                        {logInButtonText}
-                    </MyButton>
+                    <h1>
+                        Welcome back :)
+                    </h1>
+                    <MyText size='small'>
+                        Please enter your log in details:
+                    </MyText>
+
+                    <div className={myCardClasses["card__item"]}>
+                        <MyInput
+                            {...register("login")}
+                            id="login-input"
+                            label="Login"
+                            error={formState.errors.login?.message}
+                        />
+                    </div>
+                    <div className={myCardClasses["card__item"]}>
+                        <MyInput
+                            {...register("password")}
+                            id="password-input"
+                            label="Password"
+                            error={formState.errors.password?.message}
+                        />
+                    </div>
+                    <div className={myCardClasses["card__item"]}>
+                        <MyButton type='submit' loading={isLoading}>
+                            {logInButtonText}
+                        </MyButton>
+                    </div>
+                    <MyText size='small'> Do not have an account? Sign in </MyText>
                 </MyCard>
             </form>
         </div>

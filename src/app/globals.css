@@ -4,6 +4,8 @@ html {
     --spacing-m: 20px;
     --spacing-s: 16px;
     --spacing-xs: 12px;
+
+    --font-size-s: 14px;
     --font-size-m: 20px;
     --font-size-l: 28px;
     --font-size-xl: 36px;
@@ -16,7 +18,7 @@ html {
     --color-secondary-light: #a1a5aa;
     --color-secondary-dark: #495057;
 
-    --color-accent: #ffc107;
+    --color-accent: #E9D2F4;
     --color-accent-light: #ffe08a;
     --color-accent-dark: #ffb000;
 

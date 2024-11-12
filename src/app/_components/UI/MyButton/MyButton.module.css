@@ -3,6 +3,7 @@
 .button__container {
     --button-height: 40px;
     --spinner-size: calc(var(--button-height) - var(--button-height) / 5);
+    --button-color: var(--color-accent);
 
     position: relative;
     display: flex;
@@ -18,6 +19,7 @@
     top: 0px;
     margin: 0px;
     line-height: var(--button-height);
+
     animation-name: pop-after-loading__text-animation;
     animation-duration: 0.2s;
     animation-fill-mode: forwards;
@@ -28,7 +30,7 @@
     overflow: hidden;
     position: absolute;
     width: 100%;
-    background-color: var(--color-accent);
+    background-color: var(--button-color);
     color: var(--color-text-primary);
     font-size: var(--font-size-s);
     height: var(--button-height);
@@ -36,6 +38,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     transition: width 0.2s ease;
     animation: pop-after-loading 0.2s;
 }
@@ -57,7 +60,7 @@
 
 .button--loading,
 .button:disabled {
-    background-color: var(--color-accent);
+    background-color: var(--button-color);
     cursor: wait;
 }
 
@@ -66,7 +69,7 @@
 .spinner__container {
     --spinner-center-size: calc(var(--spinner-size) - var(--spinner-size) / 3.14);
     --spinner-color: var(--color-text-primary);
-    --spinner-background-color: var(--color-accent);
+    --spinner-background-color: var(--button-color);
     height: var(--spinner-size);
     width: var(--spinner-size);
     display: flex;

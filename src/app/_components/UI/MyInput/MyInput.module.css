@@ -1,50 +1,51 @@
 .input__container {
+    --input-container-height: 60px;
+    --error-height: calc(var(--input-container-height) * 0.3);
+    --input-height: calc(var(--input-container-height) * 0.4);
+    --label-height: calc(var(--input-container-height) * 0.3);
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: var(--input-container-height);
     position: relative;
     width: 100%;
-    margin-bottom: 10px;
 }
 
 .input {
-    --input-color: lightgray;
-    border: 2px solid var(--input-color);
-    border-radius: 15px;
-    height: 50px;
     font-size: var(--font-size-m);
-    padding: 10px var(--spacing-xs);
+    margin-bottom: var(--error-height);
     width: 100%;
-    background-color: white;
-    outline: none;
+    height: var(--input-height);
+    border-bottom: 2px solid black;
 }
 
-.input:focus {
-    background-color: rgba(var(--input-color), 0.1);
-    border-color: var(--color-accent);
-    box-shadow: 0 0 5px var(--color-accent);
+
+.input:focus+.input__label,
+.input:not(:placeholder-shown)+.input__label {
+    scale: 0.7;
+    cursor: default;
+    top: 0px
 }
 
-.label {
+.input__label {
+    user-select: none;
+    cursor: text;
+    line-height: var(--label-height);
+    font-size: var(--font-size-m);
     position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
+    left: 0px;
+    top: calc(var(--input-height) - var(--input-height) * 0.2);
+
+    transform-origin: 0;
+    transition: top 0.15s, scale 0.15s;
+}
+
+.input__error {
     font-size: var(--font-size-s);
-    color: var(--input-color);
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-
-.input:focus + .label,
-.input:not(:placeholder-shown) + .label {
-    top: -10px;
-    left: 10px;
-    font-size: var(--font-size-xs);
-    color: var(--color-accent); 
-}
-
-.input:focus {
-    border-bottom: 2px solid var(--color-accent);
-}
-
-.input:focus + .label {
-    color: var(--color-accent);
+    top: calc(var(--input-container-height) - var(--error-height) + 5px);
+    left: 0px;
+    position: absolute;
+    color: var(--color-error);
+    width: 100%;
 }
