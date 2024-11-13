@@ -1,17 +1,17 @@
-import React, { forwardRef, ReactNode, RefObject, useRef } from 'react'
+import React, { FC } from 'react'
+import classes from "./MyError.module.css"
 
-export interface IMyError {
+export type TMyErrorProps = {
     children: string,
-    errorFor: RefObject<HTMLInputElement>
 }
 
-const MyError = forwardRef<HTMLDivElement, IMyError>(({ children, errorFor }, ref) => {
+const MyError: FC<TMyErrorProps> = ({ children }) => {
 
     return (
-        <div data-component-name='my-error' ref={ref}>
-            {children}
+        <div className={classes["error"]}>
+            ⚠ {children}
         </div>
     )
-})
+}
 
 export default MyError

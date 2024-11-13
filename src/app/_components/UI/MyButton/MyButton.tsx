@@ -20,7 +20,11 @@ const MyLoadingSpinner: FC<{ children: ReactNode }> = ({ children }) => {
     )
 }
 
-const MyButton: React.FC<MyButtonProps> = ({ children, loading = true, ...props }) => {
+const MyButton: React.FC<MyButtonProps> = ({ children, loading, ...props }) => {
+
+    // const [wasSubmitted, setWasSubmitted] = () =>{
+
+    // }
 
     return (
         <div className={classes["button__container"]}>

@@ -58,8 +58,7 @@
 }
 
 
-.button--loading,
-.button:disabled {
+.button--loading .button:disabled {
     background-color: var(--button-color);
     cursor: wait;
 }

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, forwardRef, ReactNode, useState } from 'react'
 import classes from "./MyInput.module.css"
+import MyError from '../MyError/MyError'
 
 interface MyInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label: ReactNode,
@@ -33,7 +34,9 @@ const MyInput = forwardRef<HTMLInputElement, MyInputProps>(({ id, label, onChang
             <label htmlFor={id} className={classes["input__label"]}>
                 {label}
             </label>
-            {error && <div className={classes["input__error"]}>⚠ {error}</div>}
+            {error && <div className={classes["input__error"]}>
+                <MyError>{error}</MyError>
+            </div>}
         </div>
     )
 })

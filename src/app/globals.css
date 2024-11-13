@@ -1,9 +1,11 @@
 html {
     --header-height: 100px;
 
-    --spacing-m: 20px;
-    --spacing-s: 16px;
+    --spacing-l: 52px;
+    --spacing-m: 32px;
+    --spacing-s: 20px;
     --spacing-xs: 12px;
+    --spacing-xxs: 4px;
 
     --font-size-s: 14px;
     --font-size-m: 20px;
@@ -18,17 +20,17 @@ html {
     --color-secondary-light: #a1a5aa;
     --color-secondary-dark: #495057;
 
-    --color-accent: #E9D2F4;
+    --color-accent: #CF9CE7;
     --color-accent-light: #ffe08a;
     --color-accent-dark: #ffb000;
 
-    --color-background: black;
+    --color-background: #141415;
     --color-surface: #f8f9fa;
     /* cards or sections */
 
     --color-border: #dee2e6;
-    --color-text-primary: #ffffff;
-    --color-text-secondary: #6c757d;
+    --color-text-primary: #141415;
+    --color-text-secondary: #f8f9fa;
 
     --color-success: #28a745;
     --color-warning: #ffc107;

@@ -42,10 +42,8 @@
 }
 
 .input__error {
-    font-size: var(--font-size-s);
     top: calc(var(--input-container-height) - var(--error-height) + 5px);
     left: 0px;
     position: absolute;
-    color: var(--color-error);
     width: 100%;
 }

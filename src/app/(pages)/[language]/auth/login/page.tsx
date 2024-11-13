@@ -11,15 +11,26 @@ import { useRouter } from 'next/navigation'
 import { TNextPageWithParams } from '@/app/_types/types'
 import isErrorResponse from '@/app/_utils/apiCalls/isErrorResponse'
 import addErrorsFromResToForm from '@/app/_utils/form/addErrorsFromResToForm'
-import myCardClasses from "@/app/_components/UI/MyCard/MyCard.module.css"
 import MyText from '@/app/_components/UI/MyText/MyText'
+import MyStack from '@/app/_components/UI/MyStack/MyStack'
+import Link from 'next/link'
 
 const Login: TNextPageWithParams<{}, { redirect: string }> = ({ params, searchParams }) => {
 
-    const { register, handleSubmit, watch, control, formState, setError, getValues } = useForm<TLoginReqData>()
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const [logInButtonText, setLogInButtonText] = useState("Log in")
+    const [globalLoginEror, setGlobalLoginError] = useState("")
+
+    const { register, handleSubmit, formState: { isDirty, isValid, isSubmitted, errors }, setError, getValues } = useForm<TLoginReqData>({
+        mode: "onSubmit",
+        reValidateMode: "onChange",
+        disabled: isLoading,
+        defaultValues: {
+            login: "",
+            password: ""
+        }
+    })
 
     const changeButtonTextTimer = useRef<NodeJS.Timeout | null>(null)
 
@@ -27,7 +38,7 @@ const Login: TNextPageWithParams<{}, { redirect: string }> = ({ params, searchPa
         setIsLoading(true)
         const res = await fetchLogin(loginData)
         if (isErrorResponse(res)) {
-            addErrorsFromResToForm(res, setError, getValues)
+            addErrorsFromResToForm(res, setError, getValues, setGlobalLoginError)
             setIsLoading(false)
 
             setLogInButtonText("Try again")
@@ -42,39 +53,58 @@ const Login: TNextPageWithParams<{}, { redirect: string }> = ({ params, searchPa
         setIsLoading(false)
     }
 
+    console.log(params.language)
+
     return (
         <div className={classes["login-form__container"]}>
             <form onSubmit={handleSubmit(onSubmit)} className={classes["login-form"]}>
-                <MyCard backgroundColor='var(--color-primary)'>
-                    <h1>
-                        Welcome back :)
-                    </h1>
-                    <MyText size='small'>
-                        Please enter your log in details:
-                    </MyText>
+                <MyCard backgroundColor='var(--color-surface)'>
+                    <MyStack gapSize='large' direction='column' alignHorisontal='center'>
+                        <MyStack alignHorisontal='center' gapSize='small'>
+                            <h1>
+                                Welcome back :)
+                            </h1>
+                            <MyText size='small'>
+                                Please enter your details:
+                            </MyText>
+                        </MyStack>
 
-                    <div className={myCardClasses["card__item"]}>
-                        <MyInput
-                            {...register("login")}
-                            id="login-input"
-                            label="Login"
-                            error={formState.errors.login?.message}
-                        />
-                    </div>
-                    <div className={myCardClasses["card__item"]}>
-                        <MyInput
-                            {...register("password")}
-                            id="password-input"
-                            label="Password"
-                            error={formState.errors.password?.message}
-                        />
-                    </div>
-                    <div className={myCardClasses["card__item"]}>
-                        <MyButton type='submit' loading={isLoading}>
-                            {logInButtonText}
-                        </MyButton>
-                    </div>
-                    <MyText size='small'> Do not have an account? Sign in </MyText>
+                        <MyStack gapSize='small'>
+                            <MyInput
+                                {...register("login", {
+                                    required: "Login is required",
+                                    minLength: {
+                                        value: 3,
+                                        message: "Minimal length is 3 characters"
+                                    }
+                                })}
+                                id="login-input"
+                                label="Login"
+                                error={errors.login?.message}
+                            />
+                            <MyInput
+                                {...register("password", {
+                                    required: "Password is required",
+                                    minLength: {
+                                        value: 4,
+                                        message: "Minimal length is 4 characters"
+                                    }
+                                })}
+                                id="password-input"
+                                label="Password"
+                                error={errors.password?.message}
+                            />
+                            <MyButton type='submit' loading={isLoading} disabled={isSubmitted && !isValid}>
+                                {logInButtonText}
+                            </MyButton>
+
+                            <div>{globalLoginEror}</div>
+                        </MyStack>
+
+                        <Link href={`/${params.language}/auth/register`}>
+                            <MyText size='small'> Do not have an account? <strong>Sign in</strong></MyText>
+                        </Link>
+                    </MyStack>
                 </MyCard>
             </form>
         </div>
