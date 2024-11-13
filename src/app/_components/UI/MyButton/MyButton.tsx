@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, FC, ReactNode, useEffect, useRef } from 'react'
+import React, { ButtonHTMLAttributes, FC, MouseEvent, ReactNode, useEffect, useRef, useState } from 'react'
 import classes from "./MyButton.module.css"
 
 interface MyButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,15 +20,20 @@ const MyLoadingSpinner: FC<{ children: ReactNode }> = ({ children }) => {
     )
 }
 
-const MyButton: React.FC<MyButtonProps> = ({ children, loading, ...props }) => {
+const MyButton: React.FC<MyButtonProps> = ({ children, loading, onClick, ...props }) => {
 
-    // const [wasSubmitted, setWasSubmitted] = () =>{
-
-    // }
+    const [wasClicked, setWasClicked] = useState(false)
+    const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+        if (onClick) {
+            onClick(e)
+        }
+        setWasClicked(true)
+    }
+    const buttonClasses = `${classes["button"]} ${loading && classes["button--loading"]} ${wasClicked && classes["button--was-clicked"]}`
 
     return (
         <div className={classes["button__container"]}>
-            <button {...props} className={`${classes["button"]} ${loading && classes["button--loading"]}`} disabled={props.disabled || loading}>
+            <button {...props} onClick={handleButtonClick} className={buttonClasses} disabled={props.disabled || loading}>
                 {loading
                     ? <MyLoadingSpinner>{children}</MyLoadingSpinner>
                     : <span>{children}</span>
