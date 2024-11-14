@@ -9,7 +9,7 @@ const MyError: FC<TMyErrorProps> = ({ children }) => {
 
     return (
         <div className={classes["error"]}>
-            ⚠ {children}
+            {children && <>⚠ {children}</>}
         </div>
     )
 }

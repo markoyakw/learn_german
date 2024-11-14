@@ -1,11 +1,11 @@
-import { TLoginReqData, TLoginResData } from "@/app/api/(routes)/auth/login/route";
 import getBasicUrl from "../../url/getBasicUrl";
 import { TErrorResponse } from "@/app/_types/types";
+import { TRegisterReqData, TRegisterResData } from "@/app/api/(routes)/auth/register/route";
 
-const fetchLogIn = async (loginData: TLoginReqData): Promise<TLoginResData | TErrorResponse> => {
+const fetchRegister = async (registerData: TRegisterReqData): Promise<TRegisterResData | TErrorResponse> => {
     const basicUrl = getBasicUrl()
-    const url = `${basicUrl}/api/auth/login`
-    const body = JSON.stringify(loginData)
+    const url = `${basicUrl}/api/auth/register`
+    const body = JSON.stringify(registerData)
     try {
         const res = await fetch(url, {
             body,
@@ -25,4 +25,4 @@ const fetchLogIn = async (loginData: TLoginReqData): Promise<TLoginResData | TEr
     }
 }
 
-export default fetchLogIn
+export default fetchRegister

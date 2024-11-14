@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { NextPage } from "next";
 import { SUPPORTED_LANGUAGES } from "../constants";
+import { ReactNode } from 'react';
 
 export type TAppLanguage = typeof SUPPORTED_LANGUAGES[number]
 
@@ -10,15 +11,12 @@ type TDefaultPageSearchParams = {
     language: TAppLanguage
 }
 
-export type TNextPageWithParams<
-    Params extends { [key: string]: string } = {},
-    SearchParams extends TPageSearchParams = {}
-> = NextPage<
-    {
-        params: Params & TDefaultPageSearchParams,
-        searchParams: SearchParams
-    }
->
+export type TNextPageWithParams<Props = {
+    [key: string]: ReactNode
+}> = NextPage<{
+    params: { [key: string]: string },
+    searchParams: TPageSearchParams & TDefaultPageSearchParams
+} & Props>
 
 // export type TNewCookiesMap = Map<string, { value: string, options?: Partial<ResponseCookie> }>
 

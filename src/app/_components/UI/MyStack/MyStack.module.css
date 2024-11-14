@@ -1,29 +1,7 @@
 .stack {
+    width: 100%;
+    height: 100%;
     display: flex;
-}
-
-.stack--align-items-center {
-    align-items: center;
-}
-
-.stack--align-items-end {
-    align-items: flex-end;
-}
-
-.stack--align-items-start {
-    align-items: flex-start;
-}
-
-.stack--justify-content-center {
-    justify-content: center;
-}
-
-.stack--justify-content-start {
-    justify-content: flex-start;
-}
-
-.stack--justify-content-end {
-    justify-content: flex-end;
 }
 
 .stack--gapsize-medium {

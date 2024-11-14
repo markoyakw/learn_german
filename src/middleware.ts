@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
             }
             catch (e) {
                 const language = languageCookie || await getPreferredBrowserLanguage()
-                const redirectUrl = new URL(`/${language}/auth/login`, request.url)
+                const redirectUrl = new URL(`/${language}/auth/log-in`, request.url)
 
                 //set where to redirect user after successfull login
                 redirectUrl.searchParams.set("redirect", reqPathname)

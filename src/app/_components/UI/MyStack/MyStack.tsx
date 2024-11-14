@@ -4,33 +4,26 @@ import classes from "./MyStack.module.css"
 type TMyStackProps = {
     children: ReactNode,
     direction?: "row" | "column",
-    gapSize?: "small" | "medium" | "large",
-    alignVertical?: "center" | "start" | "end",
-    alignHorisontal?: "center" | "start" | "end"
+    gapSize?: null | "small" | "medium" | "large",
+    alignItems?: "center" | "flex-start" | "flex-end",
+    justifyContent?: "center" | "flex-start" | "flex-end" | "space-around" | "space-between"
 }
 
 const MyStack: FC<TMyStackProps> = ({
     children,
-    gapSize = "medium",
+    gapSize,
     direction = "column",
-    alignVertical = "start",
-    alignHorisontal = "start"
+    alignItems = "flex-start",
+    justifyContent = "flex-start"
 }) => {
 
     const directionClassname = classes[`stack--direction-${direction}`]
-    const gapSizeClassname = classes[`stack--gapsize-${gapSize}`]
+    const gapSizeClassname = gapSize && classes[`stack--gapsize-${gapSize}`]
 
-    const alignVerticalClassname = direction === "row"
-        ? classes[`stack--align-items-${alignVertical}`]
-        : classes[`stack--justify-content-${alignVertical}`]
-    const alignHorisontalClassname = direction === "row"
-        ? classes[`stack--justify-content-${alignHorisontal}`]
-        : classes[`stack--align-items-${alignHorisontal}`]
-
-    const myStackClassName = `${classes["stack"]} ${directionClassname} ${gapSizeClassname} ${alignVerticalClassname} ${alignHorisontalClassname}`
+    const myStackClassName = `${classes["stack"]} ${directionClassname} ${gapSizeClassname}`
 
     return (
-        <div className={myStackClassName}>
+        <div className={myStackClassName} style={{ alignItems, justifyContent }}>
             {children}
         </div>
     )
