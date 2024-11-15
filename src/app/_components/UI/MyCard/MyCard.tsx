@@ -1,10 +1,9 @@
 import React, { HTMLAttributes } from 'react'
 import classes from "./MyCard.module.css"
 
-
 interface IMyCardProps extends HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
-    backgroundColor?: string
+    backgroundColor?: string;
 }
 
 const MyCard: React.FC<IMyCardProps> = ({ children, backgroundColor = 'var(--color-surface)', ...props }) => {

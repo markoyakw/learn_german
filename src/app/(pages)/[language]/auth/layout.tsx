@@ -1,17 +1,23 @@
 "use client"
 
-import MyCard from '@/app/_components/UI/MyCard/MyCard'
 import MyContainer from '@/app/_components/UI/MyContainer/MyContainer'
 import MyStack from '@/app/_components/UI/MyStack/MyStack'
-import React, { FC, ReactNode } from 'react'
+import React, { ReactElement, ReactNode, useState } from 'react'
+import { TNextPageWithParams } from '@/app/_types/types'
+import MyCard from '@/app/_components/UI/MyCard/MyCard'
 
 type AuthPageProps = {
     form: ReactNode,
     header: ReactNode,
-    linkToOtherAuthPage: ReactNode,
+    linkToOtherAuthPage: ReactElement,
 }
 
-const AuthPage: FC<AuthPageProps> = ({ header, form, linkToOtherAuthPage }) => {
+const AuthPage: TNextPageWithParams<AuthPageProps> = ({ header, form, linkToOtherAuthPage, params: { language } }) => {
+
+    const [isCardFlipping, setIsCardFlipping] = useState(false)
+    const startCardFlippingAnimation = () => {
+        setIsCardFlipping(true)
+    }
 
     return (
         <MyStack alignItems='center' justifyContent='center'>
@@ -28,7 +34,7 @@ const AuthPage: FC<AuthPageProps> = ({ header, form, linkToOtherAuthPage }) => {
                         <MyContainer width100>
                             {form}
                         </MyContainer>
-
+                        
                         {linkToOtherAuthPage}
 
                     </MyStack>

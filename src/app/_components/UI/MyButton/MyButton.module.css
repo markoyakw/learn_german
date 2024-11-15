@@ -71,7 +71,7 @@
 
 .spinner__container {
     --spinner-center-size: calc(var(--spinner-size) - var(--spinner-size) / 3.14);
-    --spinner-color: var(--color-text-primary);
+    --spinner-color: var(--color-surface);
     --spinner-background-color: var(--button-color);
     height: var(--spinner-size);
     width: var(--spinner-size);

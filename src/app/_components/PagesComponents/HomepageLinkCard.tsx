@@ -12,7 +12,7 @@ type THomePageLinkCardProps = {
 
 const HomepageLinkCard: FC<THomePageLinkCardProps> = ({ href, backgroundColor = "white", icon, children }) => {
     return (
-        <Link href={`/${href}`}>
+        <Link href={href}>
             <MyCard backgroundColor={backgroundColor}>
                 <div className={classes["link-card__icon"]}>{icon}</div>
                 <h2 className={classes["link-card__label"]}>{children}</h2>
