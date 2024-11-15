@@ -1,8 +1,9 @@
 "use client"
 import React, { useRef, useState } from 'react'
 import useSpeechSynthesis from '@/app/_hooks/useSpeechSynthesis'
-import DualSliderWithSetSteps from './DualSliderWithSetSteps'
-import J from './J'
+import MyDualSlider from '@/app/_components/UI/MyDualSlider/MyDualSlider'
+import PageHeaderTitle from '@/app/_components/Header/PageHeaderTitle/PageHeaderTitle'
+import MyCard from '@/app/_components/UI/MyCard/MyCard'
 
 const Numbers = () => {
 
@@ -72,33 +73,35 @@ const Numbers = () => {
 
     return (
         <div onKeyDown={keyDownHandler}>
-            <div>
-                <label htmlFor="number-range-slider-container">Choose a range of numbers to listen to:</label>
-                <div id='number-range-slider-container'>
-                    <DualSliderWithSetSteps onSliderChange={onSliderChange} sliderValues={sliderValues} minStepsBetweenThumbs={1} step={1} max={10} />
+            <PageHeaderTitle>Learn numbers:</PageHeaderTitle>
+            <MyCard>
+                <div>
+                    <label htmlFor="number-range-slider-container">Choose a range of numbers to listen to:</label>
+                    <div id='number-range-slider-container'>
+                        <MyDualSlider onSliderChange={onSliderChange} sliderValues={sliderValues} minStepsBetweenThumbs={1} step={1} max={1000} />
+                    </div>
                 </div>
-            </div>
-            <button onClick={nextNumberButtonClickHandler}>
-                {wasStartPressed.current ? "next number" : "start listening"}
-            </button>
-            <button onClick={reListenHandler}>RELISTEN</button>
-            <input onChange={guessedNumberInputChangeHandler} value={guessedNumber || ""} type='number' />
-            <button onClick={sumbitGuessedNumber}>SUBMIT</button>
-            <div>
-                <label htmlFor="speech-speed-input">SPEECH SPEED: {speechSpeed}x</label>
-                <input type="range" value={speechSpeed} onChange={e => setSpeechSpeed(Number(e.target.value))} min="0.5" max="1.5" step="0.1" />
-            </div>
-            <div>
-                {
-                    isGuessedNumberRight !== null &&
-                    (isGuessedNumberRight
-                        ? <div>YOU ARE RIGHT!!!</div>
-                        : <div>WRONG!!! RIGHT NUMBER IS {numberToGuess}</div>
-                    )
+                <button onClick={nextNumberButtonClickHandler}>
+                    {wasStartPressed.current ? "next number" : "start listening"}
+                </button>
+                <button onClick={reListenHandler}>RELISTEN</button>
+                <input onChange={guessedNumberInputChangeHandler} value={guessedNumber || ""} type='number' />
+                <button onClick={sumbitGuessedNumber}>SUBMIT</button>
+                <div>
+                    <label htmlFor="speech-speed-input">SPEECH SPEED: {speechSpeed}x</label>
+                    <input type="range" value={speechSpeed} onChange={e => setSpeechSpeed(Number(e.target.value))} min="0.5" max="1.5" step="0.1" />
+                </div>
+                <div>
+                    {
+                        isGuessedNumberRight !== null &&
+                        (isGuessedNumberRight
+                            ? <div>YOU ARE RIGHT!!!</div>
+                            : <div>WRONG!!! RIGHT NUMBER IS {numberToGuess}</div>
+                        )
 
-                }
-            </div>
-            <J min={0} max={10000} />
+                    }
+                </div>
+            </MyCard>
         </div>
     )
 }

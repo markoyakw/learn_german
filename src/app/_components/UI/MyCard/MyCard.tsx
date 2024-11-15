@@ -6,7 +6,7 @@ interface IMyCardProps extends HTMLAttributes<HTMLDivElement> {
     backgroundColor?: string;
 }
 
-const MyCard: React.FC<IMyCardProps> = ({ children, backgroundColor = 'var(--color-surface)', ...props }) => {
+const MyCard: React.FC<IMyCardProps> = ({ children, backgroundColor, ...props }) => {
 
     return (
         <div className={classes["card"]} {...props} style={{ "backgroundColor": backgroundColor }}>

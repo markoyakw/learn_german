@@ -1,8 +1,8 @@
 .card {
+    background-color: var(--color-surface);
+    color: var(--color-text-secondary);
     height: 100%;
     width: 100%;
     padding: var(--spacing-m);
     border-radius: 20px;
-    transform-style: preserve-3d;
-    transform-origin: 100% 100% 100%;
 }
