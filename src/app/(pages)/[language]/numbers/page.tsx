@@ -88,6 +88,8 @@ const Numbers = () => {
                     {wasStartPressed.current ? "next number" : "start listening"}
                 </MyButton>
                 <MyIconButton iconType="repeat" onClick={reListenHandler} />
+                <MyIconButton iconType="cross" onClick={reListenHandler} />
+                <MyIconButton iconType="play" onClick={reListenHandler} />
                 <MyInput onChange={guessedNumberInputChangeHandler} value={guessedNumber || ""} type='number' label="Your guess" id="guess-number-input" />
                 <MyButton onClick={sumbitGuessedNumber}>SUBMIT</MyButton>
                 <div>

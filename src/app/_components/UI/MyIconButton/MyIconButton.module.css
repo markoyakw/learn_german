@@ -1,4 +1,4 @@
-.repeat-icon {
+.icon {
     --icon-color: var(--color-primary-light);
     --icon-size: 20px;
 
@@ -6,6 +6,18 @@
     --cutout-size: calc(var(--icon-size) * 0.6);
     --arrow-line-width: calc((var(--icon-size) - var(--cutout-size)) / 2);
     --arrow-size: calc(var(--arrow-line-width) * 3);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--icon-color);
+    width: var(--icon-size);
+    height: var(--icon-size);
+}
+
+.repeat-icon {
+
     position: relative;
     display: flex;
     justify-content: center;
@@ -71,4 +83,41 @@
     background-color: var(--icon-color);
     height: var(--arrow-line-width);
     width: calc(var(--arrow-line-width) * 3);
+}
+
+
+/* Play Icon */
+.play-icon {
+    position: relative;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    background-color: var(--icon-background-color);
+    width: calc(var(--icon-size) * 0.8);
+    height: calc(var(--icon-size) * 0.8);
+}
+
+/* Cross Icon */
+.cross-icon {
+    position: relative;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    background-color: var(--icon-background-color);
+    border-radius: 50%;
+}
+
+.cross-line {
+    position: absolute;
+    background-color: var(--icon-color);
+    width: calc(var(--icon-size) * 0.8);
+    height: calc(var(--icon-size) * 0.1);
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+}
+
+.cross-line:first-child {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cross-line:last-child {
+    transform: translate(-50%, -50%) rotate(-45deg);
 }
