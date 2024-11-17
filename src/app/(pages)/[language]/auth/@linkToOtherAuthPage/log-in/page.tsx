@@ -7,7 +7,6 @@ import React from 'react'
 
 const page: TNextPageWithParams = ({ params }) => {
 
-
   return (
     <Link href={`/${params.language}/auth/register`}>
       <MyText size='small'> Do not have an account? <strong>Create one</strong></MyText>

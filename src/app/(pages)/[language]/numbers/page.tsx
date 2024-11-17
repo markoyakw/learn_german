@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef, useState } from 'react'
+import React, {useState } from 'react'
 import useSpeechSynthesis from '@/app/_hooks/useSpeechSynthesis'
 import MyDualSlider from '@/app/_components/UI/MyDualSlider/MyDualSlider'
 import PageHeaderTitle from '@/app/_components/Header/PageHeaderTitle/PageHeaderTitle'
@@ -7,10 +7,11 @@ import MyCard from '@/app/_components/UI/MyCard/MyCard'
 import MyButton from '@/app/_components/UI/MyButton/MyButton'
 import MyInput from '@/app/_components/UI/MyInput/MyInput'
 import MyIconButton from '@/app/_components/UI/MyIconButton/MyIconButton'
+import MyStack from '@/app/_components/UI/MyStack/MyStack'
+import MyContainer from '@/app/_components/UI/MyContainer/MyContainer'
 
 const Numbers = () => {
 
-    const wasStartPressed = useRef<boolean>(false)
     const [numberToGuess, setNumberToGuess] = useState<null | number>(null)
     const [guessedNumber, setGuessedNumber] = useState<null | number>(null)
     const [isGuessedNumberRight, setIsGuessedNumberRight] = useState<boolean | null>(null)
@@ -26,9 +27,6 @@ const Numbers = () => {
     }
 
     const nextNumberButtonClickHandler = () => {
-        if (!wasStartPressed.current) {
-            wasStartPressed.current = true
-        }
         setGuessedNumber(null)
         setIsGuessedNumberRight(null)
         const randomNumber = getRandomNumber()
@@ -56,7 +54,7 @@ const Numbers = () => {
         }
     }
 
-    const reListenHandler = () => {
+    const listenHandler = () => {
         if (!numberToGuess) {
             return
         }
@@ -78,18 +76,14 @@ const Numbers = () => {
         <div onKeyDown={keyDownHandler}>
             <PageHeaderTitle>Learn numbers:</PageHeaderTitle>
             <MyCard>
-                <div>
-                    <label htmlFor="number-range-slider-container">Choose a range of numbers to listen to:</label>
-                    <div id='number-range-slider-container'>
-                        <MyDualSlider onSliderChange={onSliderChange} sliderValues={sliderValues} minStepsBetweenThumbs={1} step={100} max={1000} />
-                    </div>
-                </div>
-                <MyButton onClick={nextNumberButtonClickHandler}>
-                    {wasStartPressed.current ? "next number" : "start listening"}
-                </MyButton>
-                <MyIconButton iconType="repeat" onClick={reListenHandler} />
-                <MyIconButton iconType="cross" onClick={reListenHandler} />
-                <MyIconButton iconType="play" onClick={reListenHandler} />
+                <label htmlFor="number-range-slider-container">Choose a range of numbers to listen to:</label>
+                <MyContainer height100>
+                    <MyStack gapSize="small" direction='row' justifyContent='flex-start' alignItems='center'>
+                        <MyDualSlider id='number-range-slider-container' onSliderChange={onSliderChange} sliderValues={sliderValues} minStepsBetweenThumbs={1} step={100} max={1000} />
+                        <MyIconButton iconType='play' onClick={listenHandler} />
+                        <MyIconButton iconType='skipForward' onClick={nextNumberButtonClickHandler} />
+                    </MyStack>
+                </MyContainer>
                 <MyInput onChange={guessedNumberInputChangeHandler} value={guessedNumber || ""} type='number' label="Your guess" id="guess-number-input" />
                 <MyButton onClick={sumbitGuessedNumber}>SUBMIT</MyButton>
                 <div>

@@ -8,6 +8,7 @@ interface DualSliderProps {
   max?: number;
   step?: number;
   minStepsBetweenThumbs?: number;
+  id?: string
 }
 
 const MyDualSlider: React.FC<DualSliderProps> = ({
@@ -16,6 +17,7 @@ const MyDualSlider: React.FC<DualSliderProps> = ({
   max = 100,
   step = 1,
   minStepsBetweenThumbs = 0,
+  id,
   ...props
 }) => {
   const setSliderValues = props.onSliderChange;
@@ -105,7 +107,7 @@ const MyDualSlider: React.FC<DualSliderProps> = ({
   }, [sliderValues]);
 
   return (
-    <div className={classes['slider__master-container']}>
+    <div className={classes['slider__master-container']} id={id}>
       <div className={classes['slider__container']} ref={sliderContainerRef}>
         {sliderValues.map((value, index) => (
           <div

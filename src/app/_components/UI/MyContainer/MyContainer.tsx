@@ -6,8 +6,8 @@ type TContainerProps = {
     maxWidth?: string;
     maxHeight?: string;
     width100?: boolean;
-    height100?: boolean
-} & HTMLAttributes<HTMLDivElement>
+    height100?: boolean;
+} & HTMLAttributes<HTMLDivElement>;
 
 const MyContainer: FC<TContainerProps> = ({
     children,
@@ -19,13 +19,22 @@ const MyContainer: FC<TContainerProps> = ({
     ...props
 }) => {
 
-    const width100Style = width100 && { width: "100%" }
-    const height100Style = height100 && { height: "100%" }
+    const width100Style = width100 ? { width: "100%" } : {};
+    const height100Style = height100 ? { height: "100%" } : {};
 
     return (
-        <div style={{ ...style, maxWidth, maxHeight, ...width100Style, ...height100Style }} {...props}>
+        <div 
+            style={{ 
+                ...style, 
+                maxWidth, 
+                maxHeight, 
+                ...width100Style, 
+                ...height100Style 
+            }} 
+            {...props}
+        >
             {children}
-        </div >
+        </div>
     );
 };
 

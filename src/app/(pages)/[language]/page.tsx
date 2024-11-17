@@ -3,9 +3,9 @@ import { TNextPageWithParams } from '@/app/_types/types'
 import isSupportedLanguage from '@/app/_utils/language/isSupportedLanguage'
 import { notFound } from 'next/navigation'
 import React from 'react'
-import classes from "./Homepage.module.css"
 import HomepageLinkCard from '@/app/_components/PagesComponents/HomepageLinkCard'
 import PageHeaderTitle from '@/app/_components/Header/PageHeaderTitle/PageHeaderTitle'
+import MyContainer from '@/app/_components/UI/MyContainer/MyContainer'
 
 const page: TNextPageWithParams = ({ params, searchParams }) => {
 
@@ -15,7 +15,7 @@ const page: TNextPageWithParams = ({ params, searchParams }) => {
     }
 
     return (
-        <div className={classes["home-page__container"]}>
+        <MyContainer>
             <PageHeaderTitle>Pump your skills!</PageHeaderTitle>
             <MyGrid>
                 <HomepageLinkCard href={`/${appLanguage}/numbers`} backgroundColor='#5D61C0' icon='🔢'>
@@ -34,7 +34,7 @@ const page: TNextPageWithParams = ({ params, searchParams }) => {
                     Excersizes
                 </HomepageLinkCard>
             </MyGrid>
-        </div>
+        </MyContainer>
     )
 }
 

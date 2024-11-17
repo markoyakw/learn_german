@@ -12,12 +12,7 @@ type AuthPageProps = {
     linkToOtherAuthPage: ReactElement,
 }
 
-const AuthPage: TNextPageWithParams<AuthPageProps> = ({ header, form, linkToOtherAuthPage, params: { language } }) => {
-
-    const [isCardFlipping, setIsCardFlipping] = useState(false)
-    const startCardFlippingAnimation = () => {
-        setIsCardFlipping(true)
-    }
+const AuthPage: TNextPageWithParams<AuthPageProps> = ({ header, form, linkToOtherAuthPage }) => {
 
     return (
         <MyStack alignItems='center' justifyContent='center'>
@@ -34,7 +29,7 @@ const AuthPage: TNextPageWithParams<AuthPageProps> = ({ header, form, linkToOthe
                         <MyContainer width100>
                             {form}
                         </MyContainer>
-                        
+
                         {linkToOtherAuthPage}
 
                     </MyStack>

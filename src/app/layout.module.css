@@ -8,6 +8,10 @@
     background-color: var(--color-background);
 }
 
+.layout a {
+    color: var(--color-text-primary);
+}
+
 .html {
     height: 100%;
     width: 100%;
@@ -19,5 +23,6 @@
 }
 
 .layout__content-wrap {
-    width: 980px;
+    width: 100%;
+    max-width: 980px;
 }

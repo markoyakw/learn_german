@@ -47,9 +47,3 @@ h2 {
     font-size: var(--font-size-l);
     font-weight: bold;
 }
-
-a,
-a:link,
-a:visited {
-    color: var(--color-text-primary);
-}
