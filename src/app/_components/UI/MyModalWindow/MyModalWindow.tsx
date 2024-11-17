@@ -1,6 +1,6 @@
 import React, { MouseEvent, ReactNode, useEffect, useRef } from 'react'
 import classes from "./MyModalWindow.module.css"
-import MyIconButton from '../MyIconButton'
+import MyIconButton from '../MyIconButton/MyIconButton'
 import MyCard from '../MyCard/MyCard'
 
 interface IMyModalWindowProps {

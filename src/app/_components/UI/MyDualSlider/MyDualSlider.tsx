@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import classes from './DualSliderWithSetSteps.module.css';
+import classes from './MyDualSlider.module.css';
 
 interface DualSliderProps {
   sliderValues: [number, number];

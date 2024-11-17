@@ -1,0 +1,74 @@
+.repeat-icon {
+    --icon-color: var(--color-primary-light);
+    --icon-size: 20px;
+
+    --icon-background-color: var(--color-surface);
+    --cutout-size: calc(var(--icon-size) * 0.6);
+    --arrow-line-width: calc((var(--icon-size) - var(--cutout-size)) / 2);
+    --arrow-size: calc(var(--arrow-line-width) * 3);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--icon-color);
+    width: var(--icon-size);
+    height: var(--icon-size);
+}
+
+/* cutout for arrow tail */
+.repeat-icon::after {
+    display: block;
+    content: "";
+    background-color: var(--icon-background-color);
+    width: var(--cutout-size);
+    height: var(--cutout-size);
+    border-radius: 50%;
+}
+
+/* cutout circle */
+.repeat-icon::before {
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    content: "";
+    width: var(--arrow-line-width);
+    height: var(--arrow-line-width);
+    background-color: var(--icon-color);
+    top: calc(100% - var(--arrow-size) + var(--icon-size)/10 + var(--arrow-size)/7);
+    left: calc(100% - var(--arrow-line-width) - var(--arrow-line-width)/4);
+    box-shadow: 2px -4px 0px 2px var(--icon-background-color);
+}
+
+/* arrow container */
+.repeat-icon--arrow {
+    position: absolute;
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    top: calc(var(--icon-size) / -10);
+    left: calc(var(--icon-size) - var(--arrow-size));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.repeat-icon--arrow::before {
+    display: block;
+    content: "";
+    background-color: var(--icon-color);
+    width: var(--arrow-line-width);
+    height: calc(var(--arrow-line-width) * 2);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.repeat-icon--arrow::after {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: block;
+    content: "";
+    background-color: var(--icon-color);
+    height: var(--arrow-line-width);
+    width: calc(var(--arrow-line-width) * 3);
+}
