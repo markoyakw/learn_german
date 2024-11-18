@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, ReactNode } from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 import classes from "./MyIconButton.module.css"
 import { FaPlay } from 'react-icons/fa'
 import { IoClose, IoPlaySkipForward } from 'react-icons/io5'
@@ -7,7 +7,7 @@ import { FaRepeat } from 'react-icons/fa6'
 const iconDictionary = {
     repeat: <FaRepeat />,
     play: <FaPlay fontSize="75%" />,
-    cross: <IoClose />,
+    close: <IoClose />,
     skipForward: <IoPlaySkipForward />
 } as const
 

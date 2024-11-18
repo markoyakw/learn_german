@@ -1,10 +1,11 @@
 import React, { FC, ReactNode } from 'react'
 import classes from "./MyStack.module.css"
+import { TCssSizes } from '@/app/_types/types'
 
 type TMyStackProps = {
     children: ReactNode,
     direction?: "row" | "column",
-    gapSize?: null | "small" | "medium" | "large",
+    gapSize?: null | TCssSizes,
     alignItems?: "center" | "flex-start" | "flex-end",
     justifyContent?: "center" | "flex-start" | "flex-end" | "space-around" | "space-between"
 }
@@ -18,12 +19,12 @@ const MyStack: FC<TMyStackProps> = ({
 }) => {
 
     const directionClassname = classes[`stack--direction-${direction}`]
-    const gapSizeClassname = gapSize && classes[`stack--gapsize-${gapSize}`]
+    const myStackClassName = `${classes["stack"]} ${directionClassname}`
 
-    const myStackClassName = `${classes["stack"]} ${directionClassname} ${gapSizeClassname}`
+    const gapSizeStyle = gapSize && { gap: `var(--spacing-${gapSize})` }
 
     return (
-        <div className={myStackClassName} style={{ alignItems, justifyContent }}>
+        <div className={myStackClassName} style={{ alignItems, justifyContent, ...gapSizeStyle }}>
             {children}
         </div>
     )

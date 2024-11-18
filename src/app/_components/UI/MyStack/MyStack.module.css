@@ -4,18 +4,6 @@
     display: flex;
 }
 
-.stack--gapsize-medium {
-    gap: var(--spacing-m);
-}
-
-.stack--gapsize-large {
-    gap: var(--spacing-l);
-}
-
-.stack--gapsize-small {
-    gap: var(--spacing-s);
-}
-
 .stack--direction-row {
     flex-direction: row;
 }

@@ -1,5 +1,5 @@
 "use client"
-import React, {useState } from 'react'
+import React, { useState } from 'react'
 import useSpeechSynthesis from '@/app/_hooks/useSpeechSynthesis'
 import MyDualSlider from '@/app/_components/UI/MyDualSlider/MyDualSlider'
 import PageHeaderTitle from '@/app/_components/Header/PageHeaderTitle/PageHeaderTitle'
@@ -77,8 +77,8 @@ const Numbers = () => {
             <PageHeaderTitle>Learn numbers:</PageHeaderTitle>
             <MyCard>
                 <label htmlFor="number-range-slider-container">Choose a range of numbers to listen to:</label>
-                <MyContainer height100>
-                    <MyStack gapSize="small" direction='row' justifyContent='flex-start' alignItems='center'>
+                <MyContainer height100 margin={["l", ""]}>
+                    <MyStack gapSize="s" direction='row' justifyContent='flex-start' alignItems='center'>
                         <MyDualSlider id='number-range-slider-container' onSliderChange={onSliderChange} sliderValues={sliderValues} minStepsBetweenThumbs={1} step={100} max={1000} />
                         <MyIconButton iconType='play' onClick={listenHandler} />
                         <MyIconButton iconType='skipForward' onClick={nextNumberButtonClickHandler} />

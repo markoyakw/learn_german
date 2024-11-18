@@ -18,8 +18,6 @@ export type TNextPageWithParams<Props = {
     searchParams: TPageSearchParams & TDefaultPageSearchParams
 } & Props>
 
-// export type TNewCookiesMap = Map<string, { value: string, options?: Partial<ResponseCookie> }>
-
 export type TErrorNames = "ValidationError" | "AuthenticationError" | "AuthorizationError" | "NotFoundError" | "InternalServerError"
 
 export type TError = {
@@ -37,3 +35,5 @@ export type TValidationError = {
 }
 
 export type TNextRes<ResData> = NextResponse<ResData | TErrorResponse>
+
+export type TCssSizes = "xxs" | "xs" | "s" | "m" | "l"

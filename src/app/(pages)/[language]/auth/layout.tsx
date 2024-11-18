@@ -2,7 +2,7 @@
 
 import MyContainer from '@/app/_components/UI/MyContainer/MyContainer'
 import MyStack from '@/app/_components/UI/MyStack/MyStack'
-import React, { ReactElement, ReactNode, useState } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { TNextPageWithParams } from '@/app/_types/types'
 import MyCard from '@/app/_components/UI/MyCard/MyCard'
 
@@ -21,7 +21,7 @@ const AuthPage: TNextPageWithParams<AuthPageProps> = ({ header, form, linkToOthe
                     <MyStack justifyContent='space-between' alignItems='center'>
 
                         <MyContainer>
-                            <MyStack alignItems='center' justifyContent='flex-start' gapSize='small'>
+                            <MyStack alignItems='center' justifyContent='flex-start' gapSize='s'>
                                 {header}
                             </MyStack>
                         </MyContainer>
