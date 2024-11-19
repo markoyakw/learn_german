@@ -1,5 +1,4 @@
 .header {
-    pointer-events: none;
     position: absolute;
     display: flex;
     justify-content: flex-end;
@@ -8,16 +7,16 @@
 }
 
 .header__title {
+    pointer-events: none;
     width: 100%;
     height: var(--header-height);
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     margin-top: var(--spacing-m);
     margin-bottom: calc(var(--spacing-m));
 }
 
 .header__user-avatar {
-    pointer-events: all;
     cursor: pointer;
     width: var(--header-height);
     height: var(--header-height);

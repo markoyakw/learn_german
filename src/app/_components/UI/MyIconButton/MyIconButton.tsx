@@ -6,7 +6,7 @@ import { FaRepeat } from 'react-icons/fa6'
 
 const iconDictionary = {
     repeat: <FaRepeat />,
-    play: <FaPlay fontSize="75%" />,
+    play: <FaPlay fontSize="70%" />,
     close: <IoClose />,
     skipForward: <IoPlaySkipForward />
 } as const
@@ -23,9 +23,11 @@ const MyIconButton: React.FC<IMyIconButtonProps> = ({ iconType, iconSize, ...pro
     } as React.CSSProperties;
 
     return (
-        <button className={classes["icon-button"]} style={buttonStyle} {...props}>
-            {iconDictionary[iconType]}
-        </button>
+        <div className={classes["icon-button__container"]}>
+            <button className={classes["icon-button"]} style={buttonStyle} {...props}>
+                {iconDictionary[iconType]}
+            </button>
+        </div>
     )
 }
 

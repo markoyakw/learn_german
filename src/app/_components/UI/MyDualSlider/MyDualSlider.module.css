@@ -2,8 +2,8 @@
 .slider__container {
     --slider-track-height: 8px;
     --slider-thumb-size: 20px;
-    --highlight-color: pink;
-    --slider-track-color: gray;
+    --highlight-color: var(--color-primary);
+    --slider-track-color: var(--color-secondary-light);
 
     --highlighted-area-width-percent: 0;
     --second-slider-percent: 0;
@@ -20,8 +20,9 @@
 
 /* THE REST OF STYLESHEET */
 .slider__master-container {
+    color: var(--color-text-primary);
+    width: 100%;
     height: 40px;
-    max-width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

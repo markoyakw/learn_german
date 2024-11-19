@@ -12,6 +12,8 @@ type TContainerProps = {
     maxHeight?: string;
     width100?: boolean;
     height100?: boolean;
+    width?: string;
+    height?: string
     margin?: TMargin;
 } & HTMLAttributes<HTMLDivElement>;
 
@@ -23,6 +25,8 @@ const MyContainer: FC<TContainerProps> = ({
     width100,
     height100,
     margin,
+    height,
+    width,
     ...props
 }) => {
 
@@ -70,6 +74,8 @@ const MyContainer: FC<TContainerProps> = ({
                 ...style,
                 maxWidth,
                 maxHeight,
+                width,
+                height,
                 ...getMarginStyles(),
                 ...width100Style,
                 ...height100Style

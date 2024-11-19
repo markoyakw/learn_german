@@ -1,8 +1,9 @@
 .icon-button {
     --icon-button-size: 30px;
-    
+
+    border-radius: 50%;
     color: var(--color-accent);
-    font-size: var(--icon-button-size);
+    font-size: calc(var(--icon-button-size) * 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,4 +12,17 @@
     height: var(--icon-button-size);
     max-width: var(--icon-button-size);
     max-height: var(--icon-button-size);
+}
+
+.icon-button:hover {
+    background-color: var(--color-accent-light);
+}
+
+.icon-button:active {
+    background-color: var(--color-accent);
+    color: var(--color-accent-dark);
+}
+
+.icon-button:disabled{
+    background-color: var(--color-disabled);
 }

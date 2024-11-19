@@ -1,0 +1,69 @@
+/* Slider container and styling */
+.slider--container {
+    --highlight-color: var(--color-primary);
+    --slider-track-color: var(--color-secondary-light);
+    --slider-track-height: 8px;
+    --slider-thumb-size: 20px;
+
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.slider--label {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Slider base styles */
+.slider {
+    background-color: var(--slider-track-color);
+    width: 100%;
+    height: var(--slider-track-height);
+    -webkit-appearance: none; 
+    appearance: none; 
+    border-radius: 10px; 
+}
+
+/* Webkit track */
+.slider::-webkit-slider-runnable-track {
+    z-index: 1;
+    background-color: var(--slider-track-color);
+    height: var(--slider-track-height);
+    border-radius: 5px;
+}
+
+/* Firefox track */
+.slider::-moz-range-track {
+    z-index: 1;
+    background-color: var(--slider-track-color);
+    height: var(--slider-track-height);
+    border-radius: 5px; 
+}
+
+/* Webkit thumb */
+.slider::-webkit-slider-thumb {
+    z-index: 9;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--highlight-color);
+    width: var(--slider-thumb-size);
+    height: var(--slider-thumb-size);
+    border-radius: 50%; 
+    margin-top: calc((var(--slider-track-height) - var(--slider-thumb-size)) / 2);
+    pointer-events: auto;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Firefox thumb */
+.slider::-moz-range-thumb {
+    z-index: 9;
+    background-color: var(--highlight-color);
+    width: var(--slider-thumb-size);
+    height: var(--slider-thumb-size);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}

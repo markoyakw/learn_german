@@ -31,9 +31,9 @@ const MyDualSlider: React.FC<DualSliderProps> = ({
       const slider = sliderRefs[sliderId].current;
       const tooltip = tooltipRefs[sliderId].current;
       const sliderWidth = slider.offsetWidth;
-      const thumbWidth = 20; // Approximate thumb width
-      const tooltipWidth = tooltip.offsetWidth; // Tooltip width
-      const percentage = (value - min) / (max - min); // Percentage along the slider
+      const thumbWidth = 20;
+      const tooltipWidth = tooltip.offsetWidth; 
+      const percentage = (value - min) / (max - min); 
       const newOffset = percentage * (sliderWidth - thumbWidth);
       const centeredOffset = newOffset + thumbWidth / 2 - tooltipWidth / 2;
 
