@@ -3,16 +3,16 @@ import classes from "./MySlider.module.css"
 import MyText from '../MyText/MyText';
 
 type TMySliderProps = {
-    value: number;
+    value: number
     label: ReactNode
+    id: string
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'>;
 
-const MySlider: FC<TMySliderProps> = ({ label, ...props }) => {
+const MySlider: FC<TMySliderProps> = ({ label, id, ...props }) => {
 
-    const mySliderId = `my-slider-${Date.now()}`
     return (
-        <div className={classes["slider--container"]} id={mySliderId}>
-            <label htmlFor={mySliderId} className={classes["slider--label"]}>
+        <div className={classes["slider--container"]} id={id}>
+            <label htmlFor={id} className={classes["slider--label"]}>
                 <MyText size='small'>
                     {label}
                 </MyText>

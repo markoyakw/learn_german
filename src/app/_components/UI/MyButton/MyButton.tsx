@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, FC, MouseEvent, ReactNode, useEffect, useRef, useState } from 'react'
+import React, { ButtonHTMLAttributes, FC, forwardRef, MouseEvent, ReactNode, useEffect, useRef, useState } from 'react'
 import classes from "./MyButton.module.css"
 
 interface MyButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,7 +20,7 @@ const MyLoadingSpinner: FC<{ children: ReactNode }> = ({ children }) => {
     )
 }
 
-const MyButton: React.FC<MyButtonProps> = ({ children, loading, onClick, ...props }) => {
+const MyButton = forwardRef<HTMLButtonElement, MyButtonProps>(({ children, loading, onClick, ...props }, ref) => {
 
     const [wasClicked, setWasClicked] = useState(false)
     const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -29,11 +29,11 @@ const MyButton: React.FC<MyButtonProps> = ({ children, loading, onClick, ...prop
         }
         setWasClicked(true)
     }
-    const buttonClasses = `${classes["button"]} ${loading && classes["button--loading"]} ${wasClicked && classes["button--was-clicked"]}`
+    const buttonClasses = `${classes["button"]} ${loading && classes["button--loading"]} ${(wasClicked && props.type === "submit") && classes["button--was-clicked"]}`
 
     return (
         <div className={classes["button__container"]}>
-            <button {...props} onClick={handleButtonClick} className={buttonClasses} disabled={props.disabled || loading}>
+            <button {...props} onClick={handleButtonClick} className={buttonClasses} disabled={props.disabled || loading} ref={ref}>
                 {loading
                     ? <MyLoadingSpinner>{children}</MyLoadingSpinner>
                     : <span>{children}</span>
@@ -41,6 +41,6 @@ const MyButton: React.FC<MyButtonProps> = ({ children, loading, onClick, ...prop
             </button >
         </div>
     )
-}
+})
 
 export default MyButton

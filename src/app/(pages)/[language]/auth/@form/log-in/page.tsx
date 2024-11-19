@@ -44,7 +44,7 @@ const page: TNextPageWithParams = ({ searchParams }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <MyStack gapSize='small'>
+      <MyStack gapSize='s'>
         <MyInput
           {...register("login", {
             required: requiredFieldMessage,

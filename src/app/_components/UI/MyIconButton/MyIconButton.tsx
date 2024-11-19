@@ -3,12 +3,14 @@ import classes from "./MyIconButton.module.css"
 import { FaPlay } from 'react-icons/fa'
 import { IoClose, IoPlaySkipForward } from 'react-icons/io5'
 import { FaRepeat } from 'react-icons/fa6'
+import { TbHelpTriangle } from 'react-icons/tb'
 
 const iconDictionary = {
     repeat: <FaRepeat />,
     play: <FaPlay fontSize="70%" />,
     close: <IoClose />,
-    skipForward: <IoPlaySkipForward />
+    skipForward: <IoPlaySkipForward />,
+    help: <TbHelpTriangle />
 } as const
 
 interface IMyIconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {

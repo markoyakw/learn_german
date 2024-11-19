@@ -23,6 +23,10 @@
     color: var(--color-accent-dark);
 }
 
-.icon-button:disabled{
-    background-color: var(--color-disabled);
+.icon-button:disabled,
+.icon-button:disabled.icon-button:hover,
+.icon-button:disabled.icon-button:active {
+    color: var(--color-disabled);
+    background-color: transparent;
+    cursor: default;
 }

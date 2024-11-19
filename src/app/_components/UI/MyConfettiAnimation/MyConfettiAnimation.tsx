@@ -1,3 +1,4 @@
+"use client"
 import React, { useRef, useEffect, FC } from 'react';
 import classes from "./MyConfettiAnimation.module.css";
 
@@ -16,14 +17,14 @@ type TConfettiParticle = {
 };
 
 type TMyConfettiAnimationProps = {
-    startingPoint: { x: number; y: number },
+    startingPoint?: { x: number; y: number },
     isStarted: boolean,
-    stopAnimation: () => void,
+    stopAnimation?: () => void,
     confettiCount?: number
 };
 
 const ConfettiCanvas: FC<TMyConfettiAnimationProps> = ({
-    startingPoint,
+    startingPoint = { x: window.innerWidth / 2, y: window.innerHeight / 2 },
     isStarted,
     stopAnimation,
     confettiCount = 20
@@ -134,7 +135,7 @@ const ConfettiCanvas: FC<TMyConfettiAnimationProps> = ({
 
                 // Stop animation if no confetti remains
                 if (confettiArray.length === 0) {
-                    stopAnimation()
+                    stopAnimation && stopAnimation()
                 }
             });
 
@@ -147,6 +148,7 @@ const ConfettiCanvas: FC<TMyConfettiAnimationProps> = ({
         return () => {
             if (animationFrameId.current) {
                 cancelAnimationFrame(animationFrameId.current)
+                stopAnimation && stopAnimation()
             }
         }
     }, [isStarted])

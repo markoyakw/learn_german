@@ -2,7 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 
 const useSpeechSynthesis = () => {
     const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
-    const [speed, setSpeed] = useState<number>(1)
+    const [speed, setSpeed] = useState<number>(1);
 
     useEffect(() => {
         const handleVoicesChanged = () => {
@@ -18,17 +18,21 @@ const useSpeechSynthesis = () => {
     }, []);
 
     const setSpeechSpeed = (speed: number) => {
-        const minSpeechSpeed = 0.3
-        const maxSpeechSpeed = 10
+        const minSpeechSpeed = 0.3;
+        const maxSpeechSpeed = 10;
 
         if (speed < minSpeechSpeed || speed > maxSpeechSpeed) {
-            throw Error("SpeechSynthesis speed can't be < 0.3 or > 2")
+            throw Error("SpeechSynthesis speed can't be < 0.3 or > 10");
         }
-        setSpeed(speed)
-    }
+        setSpeed(speed);
+    };
 
     const pronounceWord = useCallback(
         (textToSay: string) => {
+            // Cancel ongoing speech
+            speechSynthesis.cancel();
+
+            // Create and configure a new utterance
             const utterance = new SpeechSynthesisUtterance();
             utterance.lang = 'de';
             utterance.rate = speed;
@@ -38,6 +42,8 @@ const useSpeechSynthesis = () => {
             }
 
             utterance.text = textToSay;
+
+            // Speak the new text
             speechSynthesis.speak(utterance);
         },
         [voices, speed]
@@ -47,7 +53,7 @@ const useSpeechSynthesis = () => {
         pronounceWord,
         voices,
         speechSpeed: speed,
-        setSpeechSpeed
+        setSpeechSpeed,
     };
 };
 

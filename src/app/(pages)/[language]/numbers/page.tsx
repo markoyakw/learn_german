@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import useSpeechSynthesis from '@/app/_hooks/useSpeechSynthesis'
 import MyDualSlider from '@/app/_components/UI/MyDualSlider/MyDualSlider'
 import PageHeaderTitle from '@/app/_components/Header/PageHeaderTitle/PageHeaderTitle'
@@ -19,6 +19,8 @@ const Numbers = () => {
     const [isGuessedNumberRight, setIsGuessedNumberRight] = useState<boolean | null>(null)
     const [numberRangeValues, setNumberRangeValues] = useState<[number, number]>([0, 100])
 
+    const submitButtonRef = useRef<HTMLButtonElement>(null)
+
     const { pronounceWord, speechSpeed, setSpeechSpeed } = useSpeechSynthesis()
 
     const getRandomNumber = () => {
@@ -33,7 +35,7 @@ const Numbers = () => {
         setNumberToGuess(numberInNewRange)
     }, [numberRangeValues])
 
-    const nextNumberButtonClickHandler = () => {
+    const nextNumberToGuessHandler = () => {
         setGuessedNumber(null)
         setIsGuessedNumberRight(null)
         const randomNumber = getRandomNumber()
@@ -45,21 +47,30 @@ const Numbers = () => {
         setGuessedNumber(Number(e.target.value))
     }
 
+    const handleHelpToGuessNumber = () => {
+        setGuessedNumber(numberToGuess)
+    }
+
     const sumbitGuessedNumber = () => {
         if (numberToGuess === guessedNumber) {
+            setButtonText("Next number")
             setIsGuessedNumberRight(true)
+            setGuessedNumber(null)
         }
         else {
+            setGuessedNumber(null)
+            setButtonText("Try again!")
             setIsGuessedNumberRight(false)
         }
-        setGuessedNumber(null)
     }
 
     const keyDownHandler = (e: React.KeyboardEvent) => {
         if (e.key === "Enter") {
-            sumbitGuessedNumber()
+            submitButtonHandler()
         }
     }
+
+    const submitButtonHandler = isGuessedNumberRight ? nextNumberToGuessHandler : sumbitGuessedNumber
 
     const listenHandler = () => {
         pronounceWord(String(numberToGuess))
@@ -76,6 +87,18 @@ const Numbers = () => {
         })
     }
 
+    const getSubmitButtonCenter = () => {
+        if (submitButtonRef.current) {
+            const rect = submitButtonRef.current.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            return { x: centerX, y: centerY }
+        }
+        return
+    };
+
+    const [buttonText, setButtonText] = useState("Guess")
+
     return (
         <MyContainer onKeyDown={keyDownHandler}>
             <PageHeaderTitle>Learn numbers:</PageHeaderTitle>
@@ -89,24 +112,23 @@ const Numbers = () => {
                                     <MyDualSlider id='number-range-slider-container' onSliderChange={onSliderChange} sliderValues={numberRangeValues} minStepsBetweenThumbs={1} step={100} max={1000} />
                                     <MyContainer width100 margin={["", "xxs", "", ""]}>
                                         <MyStack direction='row' alignItems='flex-end' gapSize="xxs">
-                                            <MyIconButton iconType='play' onClick={listenHandler} />
-                                            <MyIconButton iconType='skipForward' onClick={nextNumberButtonClickHandler} />
+                                            <MyIconButton iconType='play' onClick={listenHandler} disabled={Boolean(isGuessedNumberRight)} />
+                                            <MyIconButton iconType='skipForward' onClick={nextNumberToGuessHandler} disabled={Boolean(isGuessedNumberRight)} />
                                             <MyContainer width100 margin={["", "", "", "xs"]}>
-                                                <MySlider label={`SPEECH SPEED: ${speechSpeed}x`} value={speechSpeed} onChange={e => setSpeechSpeed(Number(e.target.value))} min="0.5" max="1.5" step="0.1" />
+                                                <MySlider id="learn-numbers-speech-speed-slider" label={`SPEECH SPEED: ${speechSpeed}x`}
+                                                    value={speechSpeed} onChange={e => setSpeechSpeed(Number(e.target.value))} min="0.5" max="1.5" step="0.1" />
                                             </MyContainer>
                                         </MyStack>
                                     </MyContainer>
-                                    <MyInput onChange={guessedNumberInputChangeHandler} value={guessedNumber || ""} type='number' label="Your guess" id="guess-number-input" />
-                                    <MyButton onClick={sumbitGuessedNumber} disabled={!guessedNumber}>Guess</MyButton>
-                                    <div>
-                                        {
-                                            isGuessedNumberRight !== null &&
-                                            (isGuessedNumberRight
-                                                ? <div>YOU ARE RIGHT!!!</div>
-                                                : <div>WRONG!!! RIGHT NUMBER IS {numberToGuess}</div>
-                                            )
-                                        }
-                                    </div>
+                                    <MyStack direction='row' alignItems='center' gapSize="xs">
+                                        <MyInput onChange={guessedNumberInputChangeHandler} value={guessedNumber || ""} type='number' label="Your guess" id="guess-number-input" />
+                                        <MyIconButton iconType='help' onClick={handleHelpToGuessNumber} disabled={Boolean(isGuessedNumberRight)} />
+                                    </MyStack>
+                                    <MyButton onClick={submitButtonHandler}
+                                        disabled={!guessedNumber && !isGuessedNumberRight} ref={submitButtonRef}>
+                                        {buttonText}
+                                    </MyButton>
+                                    {isGuessedNumberRight && <MyConfettiAnimation isStarted startingPoint={getSubmitButtonCenter()} />}
                                 </MyStack>
                             </MyContainer>
                         </MyContainer>
