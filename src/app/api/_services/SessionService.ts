@@ -2,6 +2,8 @@ import { JWTPayload, jwtVerify, SignJWT } from "jose"
 import { TJWTPayload } from "../(routes)/auth/login/route"
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
+import { getMaxAge } from "next/dist/server/image-optimizer"
+import { MAX_TIME_IN_MS } from "@/app/constants"
 
 class SessionService {
     getEncodedSecretJWTKey = () => {
@@ -36,7 +38,8 @@ class SessionService {
         await res.cookies.set("session", token, {
             httpOnly: true,
             secure: !process.env.NEXT_PUBLIC_DEV,
-            sameSite: "strict"
+            sameSite: "strict",
+            maxAge: MAX_TIME_IN_MS
         })
     }
     deleteSessionData = async (res: NextResponse) => {
