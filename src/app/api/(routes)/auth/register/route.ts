@@ -4,6 +4,8 @@ import User from '@/app/api/_models/User';
 import connectDB from '@/app/api/_utils/connectDB';
 import handleCaughtErrorInApiRoute from '@/app/_utils/backend/handleCaughtErrorInApiRoute';
 import { TNextRes } from '@/app/_types/types';
+import { cookies } from 'next/headers';
+import { SUPPORTED_LANGUAGES } from '@/app/constants';
 
 export type TRegisterReqData = {
     login: string,
@@ -19,7 +21,8 @@ export async function POST(req: Request): Promise<TNextRes<TRegisterResData>> {
     try {
         connectDB()
         const data: TRegisterReqData = await req.json()
-        const { login, password, language } = data
+        const { login, password } = data
+        const language = cookies().get("app-language") || SUPPORTED_LANGUAGES[0]
         const existingUser = await User.findOne({ login })
         if (existingUser) {
             return NextResponse.json({
