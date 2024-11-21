@@ -15,6 +15,17 @@ This project is a work-in-progress app for learning German vocabulary through fl
 - **Localization**: Multilingual support for an accessible user experience.
 - **Exercise Generation**: Using ChatGPT to create custom exercises based on the words you’ve learned, reinforcing retention in a dynamic way.
 
+### ✅ Implimented Features
+
+- **Authorization**: Authorization using NextJS middleware, api routes and encryption.
+- **Auditory learning numbers**: User must guess the number that was played in german (range of numbers can be chosen to add the ability of learning on different levels).
+
+### 🚧 Features in development right now 
+
+- **Adding new words to dictionary**: Ability to add new words for users.
+- **Loaders and suspence**: Make advantage of NextJS 14 streaming to improve user experience + add loaders.
+- **My account**: Add UI to let users log out and change account information including avatars.
+
 ---
 
 ## Tech Stack 💻
