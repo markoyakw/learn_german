@@ -5,6 +5,7 @@ import MyStack from '@/app/_components/UI/MyStack/MyStack'
 import React, { ReactElement, ReactNode } from 'react'
 import { TNextPageWithParams } from '@/app/_types/types'
 import MyCard from '@/app/_components/UI/MyCard/MyCard'
+import InConstructionMessage from '@/app/_components/InConstructionMessage'
 
 type AuthPageProps = {
     form: ReactNode,

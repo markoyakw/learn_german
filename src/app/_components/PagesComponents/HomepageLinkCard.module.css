@@ -2,11 +2,18 @@
     font-size: 140px;
 }
 
-.link-card__label{
+.link-card__label {
     color: white;
 }
 
 .link-card__label,
 .link-card__icon {
     align-self: center;
+    justify-self: center;
+    text-align: center;
+}
+
+.link-card:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
 }

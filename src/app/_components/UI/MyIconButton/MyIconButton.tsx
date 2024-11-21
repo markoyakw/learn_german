@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes } from 'react'
 import classes from "./MyIconButton.module.css"
 import { FaPlay } from 'react-icons/fa'
-import { IoClose, IoPlaySkipForward } from 'react-icons/io5'
+import { IoArrowBack, IoClose, IoPlaySkipForward } from 'react-icons/io5'
 import { FaRepeat } from 'react-icons/fa6'
 import { TbHelpTriangle } from 'react-icons/tb'
 
@@ -10,7 +10,8 @@ const iconDictionary = {
     play: <FaPlay fontSize="70%" />,
     close: <IoClose />,
     skipForward: <IoPlaySkipForward />,
-    help: <TbHelpTriangle />
+    help: <TbHelpTriangle />,
+    backArrow: <IoArrowBack />
 } as const
 
 interface IMyIconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {

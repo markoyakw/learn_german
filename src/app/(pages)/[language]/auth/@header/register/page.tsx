@@ -1,7 +1,7 @@
 import MyText from '@/app/_components/UI/MyText/MyText'
 import React from 'react'
 
-const page = () => {
+const RegisterPageHeader = () => {
     return (
         <>
             <h1>
@@ -14,4 +14,4 @@ const page = () => {
     )
 }
 
-export default page
+export default RegisterPageHeader

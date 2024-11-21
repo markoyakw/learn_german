@@ -41,4 +41,6 @@ const MyInput = forwardRef<HTMLInputElement, MyInputProps>(({ id, label, onChang
     )
 })
 
+MyInput.displayName = "MyInput"
+
 export default MyInput

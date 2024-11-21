@@ -1,6 +1,7 @@
 import { TAppLanguage } from '@/app/_types/types'
 import { SUPPORTED_LANGUAGES } from '@/app/constants'
 import React, { ChangeEvent, FC } from 'react'
+import classes from "./MyLanguageSelector.module.css"
 
 type TMyLanguageSelectorProps = {
     language: TAppLanguage,
@@ -9,7 +10,7 @@ type TMyLanguageSelectorProps = {
 
 const MyLanguageSelector: FC<TMyLanguageSelectorProps> = ({ language, handleLanguageChange }) => {
     return (
-        <select value={language} onChange={handleLanguageChange}>
+        <select className={classes["select"]} value={language} onChange={handleLanguageChange}>
             {SUPPORTED_LANGUAGES.map((language) => {
                 return (
                     <option key={language} value={language} >

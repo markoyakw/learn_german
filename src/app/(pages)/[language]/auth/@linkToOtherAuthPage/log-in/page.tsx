@@ -5,7 +5,7 @@ import { TNextPageWithParams } from '@/app/_types/types'
 import Link from 'next/link'
 import React from 'react'
 
-const page: TNextPageWithParams = ({ params }) => {
+const LogInPageLinkToOtherAuthPage: TNextPageWithParams = ({ params }) => {
 
   return (
     <Link href={`/${params.language}/auth/register`}>
@@ -14,4 +14,4 @@ const page: TNextPageWithParams = ({ params }) => {
   )
 }
 
-export default page
+export default LogInPageLinkToOtherAuthPage

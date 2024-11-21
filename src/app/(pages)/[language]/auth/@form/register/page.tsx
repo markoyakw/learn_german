@@ -7,13 +7,12 @@ import { TNextPageWithParams } from '@/app/_types/types'
 import fetchRegister from '@/app/_utils/apiCalls/auth/register'
 import isErrorResponse from '@/app/_utils/apiCalls/isErrorResponse'
 import addErrorsFromResToForm from '@/app/_utils/form/addErrorsFromResToForm'
-import { TLoginReqData } from '@/app/api/(routes)/auth/login/route'
 import { TRegisterReqData } from '@/app/api/(routes)/auth/register/route'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const page: TNextPageWithParams = ({ searchParams }) => {
+const RegisterPageForm: TNextPageWithParams = ({ searchParams }) => {
 
     const requiredFieldMessage = "This field is required"
     const router = useRouter()
@@ -93,4 +92,4 @@ const page: TNextPageWithParams = ({ searchParams }) => {
     )
 }
 
-export default page
+export default RegisterPageForm

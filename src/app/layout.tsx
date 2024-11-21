@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 import { TAppLanguage } from "./_types/types";
 import classes from "./layout.module.css"
 import UserAvatar from "./_components/Header/UserAvatar/UserAvatar";
-
+import InConstructionMessage from "./_components/InConstructionMessage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +26,11 @@ export default async function RootLayout({ children }: Readonly<{
   return (
     <html lang={appLanguage} className={classes["html"]}>
       <body className={`${inter.className} ${classes["layout"]}`} >
+        <InConstructionMessage>
+          <a href="https://github.com/markoyakw/learn_german/edit/main/README.md" target="_blank" rel="noopener noreferrer" >
+            App is in development state, check already implimented and &quot;in construction&quot; features
+          </a>
+        </InConstructionMessage>
         <Header appLanguageCookie={appLanguage} wrapClassName={classes["layout__content-wrap"]}>
           <LanguageSelector />
           <UserAvatar />

@@ -44,4 +44,6 @@ class SessionService {
     }
 }
 
-export default new SessionService()
+const sessionService = new SessionService()
+
+export default sessionService

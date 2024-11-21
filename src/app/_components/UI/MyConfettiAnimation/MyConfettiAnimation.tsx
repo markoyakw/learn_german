@@ -151,7 +151,7 @@ const ConfettiCanvas: FC<TMyConfettiAnimationProps> = ({
                 stopAnimation && stopAnimation()
             }
         }
-    }, [isStarted])
+    }, [isStarted, confettiCount, startingPoint, stopAnimation])
 
     return <canvas ref={canvasRef} className={classes["confetti-canvas"]}></canvas>
 };

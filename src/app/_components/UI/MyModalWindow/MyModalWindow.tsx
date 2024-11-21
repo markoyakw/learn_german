@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactNode, useEffect, useRef } from 'react'
+import React, { MouseEvent, ReactNode, useCallback, useEffect, useRef } from 'react'
 import classes from "./MyModalWindow.module.css"
 import MyIconButton from '../MyIconButton/MyIconButton'
 import MyCard from '../MyCard/MyCard'
@@ -13,11 +13,11 @@ interface IMyModalWindowProps {
 const MyModalWindow: React.FC<IMyModalWindowProps> = ({ isOpen, children, toggleWindow, header }) => {
 
     const areaAroundModalRef = useRef<HTMLDivElement | null>(null)
-    const handleEscKeyDown = (e: KeyboardEvent) => {
+    const handleEscKeyDown = useCallback((e: KeyboardEvent) => {
         if (e.key === "Escape" && isOpen) {
             toggleWindow()
         }
-    }
+    }, [isOpen, toggleWindow])
 
     const handleClickOutsideOfModalWindow = (e: MouseEvent<HTMLElement>) => {
         if (e.target === areaAroundModalRef.current) {
@@ -30,7 +30,7 @@ const MyModalWindow: React.FC<IMyModalWindowProps> = ({ isOpen, children, toggle
         return () => {
             document.removeEventListener("keydown", handleEscKeyDown)
         }
-    }, [isOpen])
+    }, [isOpen, handleEscKeyDown])
 
     const modalAreaAround = classes["modal__area-around"] + (isOpen ? " " + classes["modal__area-around--visible"] : "")
 
@@ -39,7 +39,7 @@ const MyModalWindow: React.FC<IMyModalWindowProps> = ({ isOpen, children, toggle
             <MyCard backgroundColor='white'>
                 <div className={classes["modal__header"]}>
                     <h3>{header}</h3>
-                    <MyIconButton iconType='cross' onClick={toggleWindow} />
+                    <MyIconButton iconType='close' onClick={toggleWindow} />
                 </div>
                 <div className={classes["modal__body"]}>
                     {children}

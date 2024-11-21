@@ -14,8 +14,15 @@
     max-height: var(--icon-button-size);
 }
 
-.icon-button:hover {
-    background-color: var(--color-accent-light);
+.icon-button:hover.icon-button::after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: var(--icon-button-size);
+    height: var(--icon-button-size);
+    background-color: var(--color-accent);
+    opacity: 50%;
+    border-radius: 50%;
 }
 
 .icon-button:active {

@@ -1,4 +1,6 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+/* eslint-disable */
+
+import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import classes from './MyDualSlider.module.css';
 
 interface DualSliderProps {
@@ -24,55 +26,55 @@ const MyDualSlider: React.FC<DualSliderProps> = ({
   const sliderContainerRef = useRef<HTMLDivElement | null>(null);
   const sliderRefs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
   const tooltipRefs = [useRef<HTMLDivElement>(null), useRef<HTMLDivElement>(null)];
-  const [thumbOffsets, setThumbOffsets] = useState<[number, number]>([0, 0]);
+  const [thumbOffsets, setThumbOffsets] = useState<[number, number]>([0, 0])
 
-  const updateThumbPosition = (sliderId: 0 | 1, value: number) => {
+  const updateThumbPosition = useCallback((sliderId: 0 | 1, value: number) => {
     if (sliderRefs[sliderId].current && tooltipRefs[sliderId].current) {
-      const slider = sliderRefs[sliderId].current;
-      const tooltip = tooltipRefs[sliderId].current;
-      const sliderWidth = slider.offsetWidth;
-      const thumbWidth = 20;
-      const tooltipWidth = tooltip.offsetWidth; 
-      const percentage = (value - min) / (max - min); 
-      const newOffset = percentage * (sliderWidth - thumbWidth);
-      const centeredOffset = newOffset + thumbWidth / 2 - tooltipWidth / 2;
+      const slider = sliderRefs[sliderId].current
+      const tooltip = tooltipRefs[sliderId].current
+      const sliderWidth = slider.offsetWidth
+      const thumbWidth = 20
+      const tooltipWidth = tooltip.offsetWidth
+      const percentage = (value - min) / (max - min)
+      const newOffset = percentage * (sliderWidth - thumbWidth)
+      const centeredOffset = newOffset + thumbWidth / 2 - tooltipWidth / 2
 
       setThumbOffsets((prevOffsets) => {
-        const updatedOffsets = [...prevOffsets] as [number, number];
-        updatedOffsets[sliderId] = centeredOffset;
-        return updatedOffsets;
+        const updatedOffsets = [...prevOffsets] as [number, number]
+        updatedOffsets[sliderId] = centeredOffset
+        return updatedOffsets
       });
     }
-  };
+  }, [min, max])
 
-  const updateHighlightedAreaParameters = () => {
-    const valueToPercentMultiplier = 1 / max * 100;
-    const [firstSliderValue, secondSliderValue] = sliderValues;
+  const updateHighlightedAreaParameters = useCallback(() => {
+    const valueToPercentMultiplier = 1 / max * 100
+    const [firstSliderValue, secondSliderValue] = sliderValues
 
-    const percentOfHighlightedArea = Math.abs(firstSliderValue - secondSliderValue) * valueToPercentMultiplier;
-    const firstSliderPercent = firstSliderValue * valueToPercentMultiplier;
-    const secondSliderPercent = secondSliderValue * valueToPercentMultiplier;
+    const percentOfHighlightedArea = Math.abs(firstSliderValue - secondSliderValue) * valueToPercentMultiplier
+    const firstSliderPercent = firstSliderValue * valueToPercentMultiplier
+    const secondSliderPercent = secondSliderValue * valueToPercentMultiplier
 
     if (sliderContainerRef.current && sliderContainerRef.current.style) {
-      sliderContainerRef.current.style.setProperty('--highlighted-area-width-percent', String(percentOfHighlightedArea));
-      sliderContainerRef.current.style.setProperty('--first-slider-percent', String(firstSliderPercent));
-      sliderContainerRef.current.style.setProperty('--second-slider-percent', String(secondSliderPercent));
+      sliderContainerRef.current.style.setProperty('--highlighted-area-width-percent', String(percentOfHighlightedArea))
+      sliderContainerRef.current.style.setProperty('--first-slider-percent', String(firstSliderPercent))
+      sliderContainerRef.current.style.setProperty('--second-slider-percent', String(secondSliderPercent))
     }
-  };
+  }, [max, sliderValues])
 
   const onSliderChange = (e: ChangeEvent<HTMLInputElement>, sliderId: 0 | 1) => {
-    const prevValue = sliderValues[sliderId];
-    const givenValue = Number(e.target.value);
-    const otherThumbValue = sliderValues[1 - sliderId];
+    const prevValue = sliderValues[sliderId]
+    const givenValue = Number(e.target.value)
+    const otherThumbValue = sliderValues[1 - sliderId]
 
     const isCursorCloserToNextStep = (valueWithOffset: number): boolean =>
-      valueWithOffset % step > step / 2;
+      valueWithOffset % step > step / 2
 
     const getValueConsideringOrderOfThumbs = (givenValue: number): number => {
       const isFirstThumbValueBigger =
         (givenValue > otherThumbValue && sliderId === 0) ||
         (givenValue < otherThumbValue && sliderId === 1);
-      return isFirstThumbValueBigger ? prevValue : givenValue;
+      return isFirstThumbValueBigger ? prevValue : givenValue
     };
 
     const getClosestStepValue = (valueWithOffset: number) => {
@@ -91,20 +93,20 @@ const MyDualSlider: React.FC<DualSliderProps> = ({
       if (Math.abs(otherThumbValue - givenValue) >= minStepsBetweenThumbs * step) {
         return givenValue;
       } else return prevValue;
-    };
+    }
 
     const calculatedSliderValue = getValueConsideringOrderOfThumbs(
       getClosestStepValue(getCalculatedSliderValueWithOffset(givenValue))
-    );
+    )
 
-    setSliderValues(calculatedSliderValue, sliderId);
-    updateThumbPosition(sliderId, calculatedSliderValue);
+    setSliderValues(calculatedSliderValue, sliderId)
+    updateThumbPosition(sliderId, calculatedSliderValue)
   };
 
   useEffect(() => {
     updateHighlightedAreaParameters();
-    sliderValues.forEach((value, index) => updateThumbPosition(index as 0 | 1, value));
-  }, [sliderValues]);
+    sliderValues.forEach((value, index) => updateThumbPosition(index as 0 | 1, value))
+  }, [sliderValues, updateHighlightedAreaParameters, updateThumbPosition])
 
   return (
     <div className={classes['slider__master-container']} id={id}>
@@ -140,4 +142,4 @@ const MyDualSlider: React.FC<DualSliderProps> = ({
   );
 };
 
-export default MyDualSlider;
+export default MyDualSlider

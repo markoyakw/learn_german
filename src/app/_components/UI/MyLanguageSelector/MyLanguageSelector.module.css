@@ -1,0 +1,13 @@
+.select {
+    background-color: var(--color-accent-light);
+    color: var(--color-text-secondary);
+    border-radius: 10px;
+    padding: var(--spacing-xxs);
+    font-weight: bold;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.select:active{
+    border: none;
+}

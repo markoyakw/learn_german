@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import useSpeechSynthesis from '@/app/_hooks/useSpeechSynthesis'
 import MyDualSlider from '@/app/_components/UI/MyDualSlider/MyDualSlider'
 import PageHeaderTitle from '@/app/_components/Header/PageHeaderTitle/PageHeaderTitle'
@@ -23,22 +23,23 @@ const Numbers = () => {
 
     const { pronounceWord, speechSpeed, setSpeechSpeed } = useSpeechSynthesis()
 
-    const getRandomNumber = () => {
+    const getRandomNumberInRange = useCallback(() => {
         const minNumber = numberRangeValues[0]
         const maxNumber = numberRangeValues[1]
         const generatedNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber
         return generatedNumber
-    }
+    }, [numberRangeValues])
+
 
     useEffect(() => {
-        const numberInNewRange = getRandomNumber()
-        setNumberToGuess(numberInNewRange)
-    }, [numberRangeValues])
+        const newRandomNumber = getRandomNumberInRange()
+        setNumberToGuess(newRandomNumber)
+    }, [numberRangeValues, getRandomNumberInRange])
 
     const nextNumberToGuessHandler = () => {
         setGuessedNumber(null)
         setIsGuessedNumberRight(null)
-        const randomNumber = getRandomNumber()
+        const randomNumber = getRandomNumberInRange()
         setNumberToGuess(randomNumber)
         pronounceWord(String(randomNumber))
     }

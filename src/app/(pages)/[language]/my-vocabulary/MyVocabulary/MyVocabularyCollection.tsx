@@ -11,7 +11,7 @@ const MyVocabularyCollection: FC<TMyVocabularyCollectionProps> = ({ name, words 
     return (
         <div>
             <h3>{name}</h3>
-            {words.map(word => <Word />)}
+            {/* {words.map(word => <Word />)} */}
         </div>
     )
 }

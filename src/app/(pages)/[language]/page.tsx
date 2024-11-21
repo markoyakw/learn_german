@@ -21,17 +21,17 @@ const page: TNextPageWithParams = ({ params, searchParams }) => {
                 <HomepageLinkCard href={`/${appLanguage}/numbers`} backgroundColor='#5D61C0' icon='🔢'>
                     Learn numbers
                 </HomepageLinkCard>
-                <HomepageLinkCard href={`/${appLanguage}/learn-words`} backgroundColor='#FB410E' icon='🔢'>
-                    Learn words
+                <HomepageLinkCard href={`/${appLanguage}/my-vocabulary`} backgroundColor='#A84D7A' icon='🚧'>
+                    My vocabulary <br /> (In progress...)
                 </HomepageLinkCard>
-                <HomepageLinkCard href={`/${appLanguage}/my-vocabulary`} backgroundColor='#A84D7A' icon='🔢'>
-                    My vocabulary
+                <HomepageLinkCard href={`/${appLanguage}/learn-words`} backgroundColor='#FB410E' icon='🚧'>
+                    Learn words <br /> (In progress...)
                 </HomepageLinkCard>
-                <HomepageLinkCard href={`/${appLanguage}/earn-by-listening`} backgroundColor='#429E73' icon='🔢'>
-                    Learn by listening
+                <HomepageLinkCard href={`/${appLanguage}/earn-by-listening`} backgroundColor='#429E73' icon='🚧'>
+                    Learn by listening <br /> (In progress...)
                 </HomepageLinkCard>
-                <HomepageLinkCard href={`/${appLanguage}/exercises`} backgroundColor='#004E64' icon='🔢'>
-                    Excersizes
+                <HomepageLinkCard href={`/${appLanguage}/exercises`} backgroundColor='#004E64' icon='🚧'>
+                    Excersizes <br /> (In progress...)
                 </HomepageLinkCard>
             </MyGrid>
         </MyContainer>

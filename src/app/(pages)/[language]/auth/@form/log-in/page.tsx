@@ -1,8 +1,10 @@
 "use client"
 import MyButton from '@/app/_components/UI/MyButton/MyButton'
+import MyContainer from '@/app/_components/UI/MyContainer/MyContainer'
 import MyError from '@/app/_components/UI/MyError/MyError'
 import MyInput from '@/app/_components/UI/MyInput/MyInput'
 import MyStack from '@/app/_components/UI/MyStack/MyStack'
+import MyText from '@/app/_components/UI/MyText/MyText'
 import { TNextPageWithParams } from '@/app/_types/types'
 import fetchLogIn from '@/app/_utils/apiCalls/auth/logIn'
 import isErrorResponse from '@/app/_utils/apiCalls/isErrorResponse'
@@ -12,7 +14,7 @@ import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-const page: TNextPageWithParams = ({ searchParams }) => {
+const LogInPageForm: TNextPageWithParams = ({ searchParams }) => {
 
   const requiredFieldMessage = "This field is required"
   const router = useRouter()
@@ -28,6 +30,22 @@ const page: TNextPageWithParams = ({ searchParams }) => {
       password: ""
     }
   })
+
+  const handleLogInAsGuest = async () => {
+    const guestCredentials = {
+      login: "test",
+      password: "test"
+    }
+    const res = await fetchLogIn(guestCredentials)
+    if (isErrorResponse(res)) {
+      setGlobalLoginError("Unexpected error, please try again")
+      setIsLoading(false)
+      return
+    }
+    const redirectAfterLogIn = searchParams.redirect?.toString() || "/"
+    router.replace(redirectAfterLogIn)
+    setIsLoading(false)
+  }
 
   const onSubmit = async (loginData: TLoginReqData) => {
     setIsLoading(true)
@@ -72,11 +90,19 @@ const page: TNextPageWithParams = ({ searchParams }) => {
         <MyButton type='submit' loading={isLoading} disabled={isSubmitted && !isValid}>
           Log in
         </MyButton>
-
+        <MyContainer width100>
+          <MyStack alignItems='center'>
+            <button onClick={handleLogInAsGuest} type='button'>
+              <MyText size='small'>
+                Or log in as a <strong> guest </strong>
+              </MyText>
+            </button>
+          </MyStack>
+        </MyContainer>
         <MyError>{globalLoginEror}</MyError>
       </MyStack>
     </form>
   )
 }
 
-export default page
+export default LogInPageForm
