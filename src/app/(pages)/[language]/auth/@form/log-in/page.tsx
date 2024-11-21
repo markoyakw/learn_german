@@ -3,6 +3,7 @@ import MyButton from '@/app/_components/UI/MyButton/MyButton'
 import MyContainer from '@/app/_components/UI/MyContainer/MyContainer'
 import MyError from '@/app/_components/UI/MyError/MyError'
 import MyInput from '@/app/_components/UI/MyInput/MyInput'
+import MyPasswordInput from '@/app/_components/UI/MyPasswordInput/MyPasswordInput'
 import MyStack from '@/app/_components/UI/MyStack/MyStack'
 import MyText from '@/app/_components/UI/MyText/MyText'
 import { TNextPageWithParams } from '@/app/_types/types'
@@ -32,6 +33,7 @@ const LogInPageForm: TNextPageWithParams = ({ searchParams }) => {
   })
 
   const handleLogInAsGuest = async () => {
+    setIsLoading(true)
     const guestCredentials = {
       login: "test",
       password: "test"
@@ -75,7 +77,7 @@ const LogInPageForm: TNextPageWithParams = ({ searchParams }) => {
           label="Login"
           error={errors.login?.message}
         />
-        <MyInput
+        <MyPasswordInput
           {...register("password", {
             required: requiredFieldMessage,
             minLength: {
@@ -85,6 +87,7 @@ const LogInPageForm: TNextPageWithParams = ({ searchParams }) => {
           })}
           id="password-input"
           label="Password"
+          type="visible-password"
           error={errors.password?.message}
         />
         <MyButton type='submit' loading={isLoading} disabled={isSubmitted && !isValid}>

@@ -1,6 +1,6 @@
-import mongoose, { model, models, Mongoose, Schema } from "mongoose";
+import mongoose, { model, models, Schema } from "mongoose";
 import { supportedLanguagesEnum } from "./common";
-import Word, { TWord } from "./Word";
+import { TWord } from "./Word";
 import { TAppLanguage } from "@/app/_types/types";
 
 export type TMyVocabularyCollections = Map<string, TWord[]>

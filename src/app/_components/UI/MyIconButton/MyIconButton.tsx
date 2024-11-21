@@ -4,6 +4,7 @@ import { FaPlay } from 'react-icons/fa'
 import { IoArrowBack, IoClose, IoPlaySkipForward } from 'react-icons/io5'
 import { FaRepeat } from 'react-icons/fa6'
 import { TbHelpTriangle } from 'react-icons/tb'
+import { PiEyeBold, PiEyeClosedBold } from 'react-icons/pi'
 
 const iconDictionary = {
     repeat: <FaRepeat />,
@@ -11,7 +12,9 @@ const iconDictionary = {
     close: <IoClose />,
     skipForward: <IoPlaySkipForward />,
     help: <TbHelpTriangle />,
-    backArrow: <IoArrowBack />
+    backArrow: <IoArrowBack />,
+    openEye: <PiEyeBold />,
+    closedEye: <PiEyeClosedBold />
 } as const
 
 interface IMyIconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {

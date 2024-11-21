@@ -5,7 +5,7 @@ import MyStack from '@/app/_components/UI/MyStack/MyStack'
 import React, { ReactElement, ReactNode } from 'react'
 import { TNextPageWithParams } from '@/app/_types/types'
 import MyCard from '@/app/_components/UI/MyCard/MyCard'
-import InConstructionMessage from '@/app/_components/InConstructionMessage'
+import MyPasswordInput from '@/app/_components/UI/MyPasswordInput/MyPasswordInput'
 
 type AuthPageProps = {
     form: ReactNode,
@@ -17,7 +17,7 @@ const AuthPage: TNextPageWithParams<AuthPageProps> = ({ header, form, linkToOthe
 
     return (
         <MyStack alignItems='center' justifyContent='center'>
-            <MyContainer maxWidth='380px' maxHeight='550px' height100 width100>
+            <MyContainer maxWidth='380px' maxHeight='570px' height100 width100>
                 <MyCard>
                     <MyStack justifyContent='space-between' alignItems='center'>
 
@@ -32,7 +32,6 @@ const AuthPage: TNextPageWithParams<AuthPageProps> = ({ header, form, linkToOthe
                         </MyContainer>
 
                         {linkToOtherAuthPage}
-
                     </MyStack>
                 </MyCard>
             </MyContainer>

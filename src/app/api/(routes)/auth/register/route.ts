@@ -22,7 +22,7 @@ export async function POST(req: Request): Promise<TNextRes<TRegisterResData>> {
         connectDB()
         const data: TRegisterReqData = await req.json()
         const { login, password } = data
-        const language = cookies().get("app-language") || SUPPORTED_LANGUAGES[0]
+        const language = cookies().get("app-language")?.value || SUPPORTED_LANGUAGES[0]
         const existingUser = await User.findOne({ login })
         if (existingUser) {
             return NextResponse.json({

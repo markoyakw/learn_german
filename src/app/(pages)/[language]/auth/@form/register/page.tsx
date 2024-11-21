@@ -2,6 +2,7 @@
 import MyButton from '@/app/_components/UI/MyButton/MyButton'
 import MyError from '@/app/_components/UI/MyError/MyError'
 import MyInput from '@/app/_components/UI/MyInput/MyInput'
+import MyPasswordInput from '@/app/_components/UI/MyPasswordInput/MyPasswordInput'
 import MyStack from '@/app/_components/UI/MyStack/MyStack'
 import { TNextPageWithParams } from '@/app/_types/types'
 import fetchRegister from '@/app/_utils/apiCalls/auth/register'
@@ -57,19 +58,24 @@ const RegisterPageForm: TNextPageWithParams = ({ searchParams }) => {
                     label="Login"
                     error={errors.login?.message}
                 />
-                <MyInput
+                <MyPasswordInput
                     {...register("password", {
                         required: requiredFieldMessage,
                         minLength: {
                             value: 4,
                             message: "Minimal length is 4 characters"
+                        },
+                        validate: (value) => {
+                            if (value !== getValues("repeatPassword")) {
+                                return "Passwords don't match"
+                            }
                         }
                     })}
                     id="password-input"
                     label="Password"
                     error={errors.password?.message}
                 />
-                <MyInput
+                <MyPasswordInput
                     {...register("repeatPassword", {
                         required: requiredFieldMessage,
                         validate: (value) => {
@@ -83,7 +89,7 @@ const RegisterPageForm: TNextPageWithParams = ({ searchParams }) => {
                     error={errors.repeatPassword?.message}
                 />
                 <MyButton type='submit' loading={isLoading} disabled={isSubmitted && !isValid}>
-                    Log in
+                    Create account
                 </MyButton>
 
                 <MyError>{globalLoginEror}</MyError>

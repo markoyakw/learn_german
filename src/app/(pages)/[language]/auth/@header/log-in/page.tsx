@@ -1,4 +1,3 @@
-"use client"
 import MyText from '@/app/_components/UI/MyText/MyText'
 import React from 'react'
 
