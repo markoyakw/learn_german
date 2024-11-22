@@ -28,4 +28,6 @@ const MyPasswordInput: FC<TMyPasswordInput> = forwardRef(({ label, id, error, ..
     )
 })
 
+MyPasswordInput.displayName = "MyPasswordInput"
+
 export default MyPasswordInput

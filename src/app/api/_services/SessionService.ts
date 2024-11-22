@@ -37,8 +37,6 @@ class SessionService {
 
         await res.cookies.set("session", token, {
             httpOnly: true,
-            secure: !process.env.NEXT_PUBLIC_DEV,
-            sameSite: "strict",
             maxAge: MAX_TIME_IN_MS
         })
     }
