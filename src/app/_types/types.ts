@@ -36,4 +36,6 @@ export type TValidationError = {
 
 export type TNextRes<ResData> = NextResponse<ResData | TErrorResponse>
 
-export type TCssSizes = "xxs" | "xs" | "s" | "m" | "l"
+export type TCssSize = "xxs" | "xs" | "s" | "m" | "l"
+
+// export type TCssTextColor = "--color-text-primary" | "--color-text-secondary"

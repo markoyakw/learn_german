@@ -6,6 +6,7 @@ import getLanguageFromUrlPathname from './app/_utils/url/getLanguageFromPathname
 import SessionService from './app/api/_services/SessionService';
 import getPreferredBrowserLanguage from './app/_serverActions/getPreferredBrowserLanguage';
 import getPathnameWithoutLanguage from './app/_utils/url/getUrlWithoutLanguage';
+import { MAX_TIME_IN_MS } from './app/constants';
 
 const middlewarePathnameMatcher = (currentPathname: string, matchingPathnameArr: string[]) => {
     return matchingPathnameArr.some(path => currentPathname.startsWith(path))
@@ -38,7 +39,7 @@ export async function middleware(request: NextRequest) {
                 const response = NextResponse.redirect(redirectUrl)
                 await SessionService.deleteSessionData(response)
                 if (!languageCookie) {
-                    await response.cookies.set("app-language", language)
+                    await response.cookies.set("app-language", language, { maxAge: MAX_TIME_IN_MS })
                 }
                 return response
             }
@@ -53,7 +54,7 @@ export async function middleware(request: NextRequest) {
 
         //handle language change through url
         if (URLLanguage && URLLanguage !== languageCookie) {
-            response.cookies.set("app-language", URLLanguage)
+            response.cookies.set("app-language", URLLanguage, { maxAge: MAX_TIME_IN_MS })
         }
 
         return response

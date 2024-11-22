@@ -8,10 +8,6 @@
     background-color: var(--color-background);
 }
 
-.layout a {
-    color: var(--color-text-primary);
-}
-
 .html {
     height: 100%;
     width: 100%;
