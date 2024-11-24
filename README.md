@@ -7,7 +7,11 @@
 
 ## Overview 📘
 
-This project is a work-in-progress app for learning German vocabulary through flashcards. Built with the latest features of **Next.js 14**, it aims to combine effective language-learning techniques with AI-driven functionalities to help users build and reinforce their German vocabulary.
+This project is a work-in-progress app for learning German vocabulary through flashcards and interactive features like listening, completing AI-generated exercises and translating from and to native language.
+
+Most flashcard apps fall short because memorizing a word isn’t enough—it takes around six interactions in different contexts to truly make it part of active speech. This app will go beyond simple flashcard memorization. Interactive features will ensure diverse engagement with vocabulary, learnt from cards, turning passive knowledge into active use.
+
+Built with the latest features of **Next.js 14**, it aims to combine effective language-learning techniques with AI-driven functionalities to help users build and reinforce their German vocabulary.
 
 ### 🌟 Planned Features
 
