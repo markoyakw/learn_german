@@ -1,0 +1,25 @@
+.skeleton-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: var(--color-surface);
+    filter: brightness(0.3);
+    border-radius: inherit;
+    animation: skeleton-loader-pulsing 1.5s infinite ease-in;
+}
+
+@keyframes skeleton-loader-pulsing {
+    0% {
+        filter: brightness(0.2);
+    }
+
+    50% {
+        filter: brightness(0.35);
+    }
+
+    100% {
+        filter: brightness(0.2);
+    }
+}

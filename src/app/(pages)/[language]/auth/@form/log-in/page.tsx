@@ -51,7 +51,11 @@ const LogInPageForm: TNextPageWithParams = ({ searchParams }) => {
 
   const onSubmit = async (loginData: TLoginReqData) => {
     setIsLoading(true)
-    const res = await fetchLogIn(loginData)
+    const trimmedLoginData = {
+      password: loginData.password.trim(),
+      login: loginData.login.trim()
+    }
+    const res = await fetchLogIn(trimmedLoginData)
     if (isErrorResponse(res)) {
       addErrorsFromResToForm(res, setError, getValues, setGlobalLoginError)
       setIsLoading(false)

@@ -2,15 +2,24 @@ import React, { MouseEvent, ReactNode, useCallback, useEffect, useRef } from 're
 import classes from "./MyModalWindow.module.css"
 import MyIconButton from '../MyIconButton/MyIconButton'
 import MyCard from '../MyCard/MyCard'
+import MyContainer from '../MyContainer/MyContainer'
 
 interface IMyModalWindowProps {
     isOpen: boolean,
     children: React.ReactNode,
     toggleWindow: () => void,
-    header?: ReactNode
+    header?: ReactNode,
+    width?: string,
+    height?: string
 }
 
-const MyModalWindow: React.FC<IMyModalWindowProps> = ({ isOpen, children, toggleWindow, header }) => {
+const MyModalWindow: React.FC<IMyModalWindowProps> = ({
+    isOpen,
+    children,
+    toggleWindow,
+    header,
+    width,
+    height }) => {
 
     const areaAroundModalRef = useRef<HTMLDivElement | null>(null)
     const handleEscKeyDown = useCallback((e: KeyboardEvent) => {
@@ -36,15 +45,17 @@ const MyModalWindow: React.FC<IMyModalWindowProps> = ({ isOpen, children, toggle
 
     return (
         <div className={modalAreaAround} onClick={handleClickOutsideOfModalWindow} ref={areaAroundModalRef}>
-            <MyCard backgroundColor='white'>
-                <div className={classes["modal__header"]}>
-                    <h3>{header}</h3>
-                    <MyIconButton iconType='close' onClick={toggleWindow} />
-                </div>
-                <div className={classes["modal__body"]}>
-                    {children}
-                </div>
-            </MyCard>
+            <MyContainer width={width} height={height}>
+                <MyCard backgroundColor='white'>
+                    <div className={classes["modal__header"]}>
+                        <h3>{header}</h3>
+                        <MyIconButton iconType='close' onClick={toggleWindow} />
+                    </div>
+                    <div className={classes["modal__body"]}>
+                        {children}
+                    </div>
+                </MyCard>
+            </MyContainer>
         </div>
     )
 }
